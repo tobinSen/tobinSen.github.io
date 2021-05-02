@@ -14,12 +14,12 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-center-atom.min.css">
   <script src="/lib/pace/pace.min.js"></script>
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"a6one.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"a6one.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -28,6 +28,7 @@
 <meta property="og:site_name" content="动人の橘子">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="a6one">
+<meta property="article:tag" content="java,Spring,SpringBoot">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://a6one.github.io/">
@@ -134,11 +135,6 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
-        <li class="menu-item menu-item-schedule">
-
-    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a>
-
-  </li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -193,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/05/02/propertyUtils/">
+    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/05/02/Apache-BeanUtils/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://pic.iqy.ink/2020/10/18/aa81ed85bd94e.jpg">
@@ -207,7 +203,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/02/propertyUtils/" class="post-title-link" itemprop="url">propertyUtils</a>
+            <a href="/2021/05/02/Apache-BeanUtils/" class="post-title-link" itemprop="url">Apache-BeanUtils</a>
         </h2>
 
         <div class="post-meta">
@@ -216,10 +212,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-02 11:52:34 / 修改时间：15:54:33" itemprop="dateCreated datePublished" datetime="2021-05-02T11:52:34+08:00">2021-05-02</time>
+              <time title="创建时间：2021-05-02 11:52:34" itemprop="dateCreated datePublished" datetime="2021-05-02T11:52:34+08:00">2021-05-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-02 12:00:00" itemprop="dateModified" datetime="2020-05-02T12:00:00+08:00">2020-05-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -231,7 +233,7 @@
             </span>
 
           
-            <span id="/2021/05/02/propertyUtils/" class="post-meta-item leancloud_visitors" data-flag-title="propertyUtils" title="阅读次数">
+            <span id="/2021/05/02/Apache-BeanUtils/" class="post-meta-item leancloud_visitors" data-flag-title="Apache-BeanUtils" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -246,8 +248,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2021/05/02/propertyUtils/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/02/propertyUtils/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/05/02/Apache-BeanUtils/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/02/Apache-BeanUtils/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -269,10 +271,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-            <img src="https://gitee.com/a6one/blog_upic/raw/master/uPic/image-20210502151955804.png" itemprop="contentUrl">
-        </div>
-          <h2 id="PropertyUtils"><a href="#PropertyUtils" class="headerlink" title="PropertyUtils"></a>PropertyUtils</h2><blockquote>
+          <p>简介：Apache BeanUtil提供了很多的基于类、属性、方法之间的获取和设置的方式</p>
+<img src="/2021/05/02/Apache-BeanUtils/image-20210502152251662.png">
+
+<h2 id="PropertyUtils"><a href="#PropertyUtils" class="headerlink" title="PropertyUtils"></a>PropertyUtils</h2><blockquote>
 <p><strong><em>本质上是调用PropertyUtilsBean类来实现功能</em></strong></p>
 </blockquote>
 <ol>
@@ -285,9 +287,10 @@
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Employee employee = <span class="keyword">new</span> Employee();</span><br><span class="line">String firstName = (String) PropertyUtils.getSimpleProperty(employee, <span class="string">&quot;firstName&quot;</span>);   <span class="comment">// 获取基本类型属性的值</span></span><br><span class="line">String lastName = (String) PropertyUtils.getSimpleProperty(employee, <span class="string">&quot;lastName&quot;</span>);</span><br><span class="line"></span><br><span class="line">PropertyUtils.setSimpleProperty(employee, <span class="string">&quot;firstName&quot;</span>, firstName);                    <span class="comment">// 设置基本类型的属性值</span></span><br><span class="line">PropertyUtils.setSimpleProperty(employee, <span class="string">&quot;lastName&quot;</span>, lastName);</span><br></pre></td></tr></table></figure>
+<p><img src="/2021/05/02/Apache-BeanUtils/image-20210502152251662.png"></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/05/02/propertyUtils/#more" rel="contents">
+              <a class="btn" href="/2021/05/02/Apache-BeanUtils/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

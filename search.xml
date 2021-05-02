@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>propertyUtils</title>
-    <url>/2021/05/02/propertyUtils/</url>
-    <content><![CDATA[<h2 id="PropertyUtils"><a href="#PropertyUtils" class="headerlink" title="PropertyUtils"></a>PropertyUtils</h2><blockquote>
+    <title>Apache-BeanUtils</title>
+    <url>/2021/05/02/Apache-BeanUtils/</url>
+    <content><![CDATA[<p>简介：Apache BeanUtil提供了很多的基于类、属性、方法之间的获取和设置的方式</p>
+<img src="/2021/05/02/Apache-BeanUtils/image-20210502152251662.png">
+
+<h2 id="PropertyUtils"><a href="#PropertyUtils" class="headerlink" title="PropertyUtils"></a>PropertyUtils</h2><blockquote>
 <p><strong><em>本质上是调用PropertyUtilsBean类来实现功能</em></strong></p>
 </blockquote>
 <ol>
@@ -16,8 +19,8 @@
 </li>
 </ol>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Employee employee = <span class="keyword">new</span> Employee();</span><br><span class="line">String firstName = (String) PropertyUtils.getSimpleProperty(employee, <span class="string">&quot;firstName&quot;</span>);   <span class="comment">// 获取基本类型属性的值</span></span><br><span class="line">String lastName = (String) PropertyUtils.getSimpleProperty(employee, <span class="string">&quot;lastName&quot;</span>);</span><br><span class="line"></span><br><span class="line">PropertyUtils.setSimpleProperty(employee, <span class="string">&quot;firstName&quot;</span>, firstName);                    <span class="comment">// 设置基本类型的属性值</span></span><br><span class="line">PropertyUtils.setSimpleProperty(employee, <span class="string">&quot;lastName&quot;</span>, lastName);</span><br></pre></td></tr></table></figure>
-
- <a id="more"></a>
+<p><img src="/2021/05/02/Apache-BeanUtils/image-20210502152251662.png"></p>
+<a id="more"></a>
 
 <ol start="2">
 <li>访问索引类型的Bean属性</li>
@@ -25,7 +28,7 @@
 <p>获取bean中含有可索引的属性，如果ArrayList、数组等，可以通过下标索引来访问Bean属性的值，同理也可以设置值</p>
 <ul>
 <li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getIndexedProperty-java.lang.Object-java.lang.String-">PropertyUtils.getIndexedProperty(Object, String)</a></li>
-<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getIndexedProperty-java.lang.Object-java.lang.String-int-">PropertyUtils.getIndexedProperty(Object, String, int)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getIndexedProperty-java.lang.Object-java.lang.String-int-">PropertyUtils.getIndexedProperty(Object, Stng, int)</a></li>
 <li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setIndexedProperty-java.lang.Object-java.lang.String-java.lang.Object-">PropertyUtils.setIndexedProperty(Object, String, Object)</a></li>
 <li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setIndexedProperty-java.lang.Object-java.lang.String-int-java.lang.Object-">PropertyUtils.setIndexedProperty(Object, String, int, Object)</a></li>
 </ul>
@@ -67,7 +70,7 @@
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PropertyUtils.setProperty(nestedBean, <span class="string">&quot;listProperty[0].lastName&quot;</span>, <span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-]]></content>
+<h4 id><a href="#" class="headerlink" title></a></h4>]]></content>
       <categories>
         <category>apache-common</category>
       </categories>
