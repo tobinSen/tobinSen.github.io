@@ -1,8 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Apache-common</title>
-    <url>/2021/04/29/Apache-common/</url>
-    <content><![CDATA[<h1 id="Apche-lang"><a href="#Apche-lang" class="headerlink" title="Apche-lang"></a>Apche-lang</h1>]]></content>
+    <title>propertyUtils</title>
+    <url>/2021/05/02/propertyUtils/</url>
+    <content><![CDATA[<h2 id="PropertyUtils"><a href="#PropertyUtils" class="headerlink" title="PropertyUtils"></a>PropertyUtils</h2><blockquote>
+<p><strong><em>本质上是调用PropertyUtilsBean类来实现功能</em></strong></p>
+</blockquote>
+<ol>
+<li><p>访问基本数据类型的Bean属性</p>
+<ul>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getSimpleProperty-java.lang.Object-java.lang.String-">PropertyUtils.getSimpleProperty(Object, String)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setSimpleProperty-java.lang.Object-java.lang.String-java.lang.Object-">PropertyUtils.setSimpleProperty(Object, String, Object)</a></li>
+</ul>
+<p>示例：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Employee employee = <span class="keyword">new</span> Employee();</span><br><span class="line">String firstName = (String) PropertyUtils.getSimpleProperty(employee, <span class="string">&quot;firstName&quot;</span>);   <span class="comment">// 获取基本类型属性的值</span></span><br><span class="line">String lastName = (String) PropertyUtils.getSimpleProperty(employee, <span class="string">&quot;lastName&quot;</span>);</span><br><span class="line"></span><br><span class="line">PropertyUtils.setSimpleProperty(employee, <span class="string">&quot;firstName&quot;</span>, firstName);                    <span class="comment">// 设置基本类型的属性值</span></span><br><span class="line">PropertyUtils.setSimpleProperty(employee, <span class="string">&quot;lastName&quot;</span>, lastName);</span><br></pre></td></tr></table></figure>
+
+ <a id="more"></a>
+
+<ol start="2">
+<li>访问索引类型的Bean属性</li>
+</ol>
+<p>获取bean中含有可索引的属性，如果ArrayList、数组等，可以通过下标索引来访问Bean属性的值，同理也可以设置值</p>
+<ul>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getIndexedProperty-java.lang.Object-java.lang.String-">PropertyUtils.getIndexedProperty(Object, String)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getIndexedProperty-java.lang.Object-java.lang.String-int-">PropertyUtils.getIndexedProperty(Object, String, int)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setIndexedProperty-java.lang.Object-java.lang.String-java.lang.Object-">PropertyUtils.setIndexedProperty(Object, String, Object)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setIndexedProperty-java.lang.Object-java.lang.String-int-java.lang.Object-">PropertyUtils.setIndexedProperty(Object, String, int, Object)</a></li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Employee employee00 = (Employee) PropertyUtils.getIndexedProperty(indexedBean,<span class="string">&quot;employeeList&quot;</span>, <span class="number">0</span>);  <span class="comment">// 获取indexBean中employeeList中的index=0的元素</span></span><br><span class="line">Employee employee11 = (Employee) PropertyUtils.getIndexedProperty(indexedBean,<span class="string">&quot;employeeList&quot;</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>访问Map映射类型的Bean属性</li>
+</ol>
+<p>获取bean中含有常见的HashMap，TreeMap等，可以通过key来访问Bean属性值，同理可设置value</p>
+<ul>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getMappedProperty-java.lang.Object-java.lang.String-">PropertyUtils.getMappedProperty(Object, String)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getMappedProperty-java.lang.Object-java.lang.String-java.lang.String-">PropertyUtils.getMappedProperty(Object, String, String)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setMappedProperty-java.lang.Object-java.lang.String-java.lang.Object-">PropertyUtils.setMappedProperty(Object, String, Object)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setMappedProperty-java.lang.Object-java.lang.String-java.lang.String-java.lang.Object-">PropertyUtils.setMappedProperty(Object, String, String, Object)</a></li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PropertyUtils.setMappedProperty(employee, <span class="string">&quot;mapProperty&quot;</span>, <span class="string">&quot;testKey1&quot;</span>, <span class="string">&quot;testValue1&quot;</span>);</span><br><span class="line">PropertyUtils.setMappedProperty(employee, <span class="string">&quot;mapProperty(testKey2)&quot;</span>, <span class="string">&quot;testValue2&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>访问嵌套类型的Bean属性</li>
+</ol>
+<p>获取bean中含有指的是对象内嵌套对象</p>
+<ul>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getNestedProperty-java.lang.Object-java.lang.String-">PropertyUtils.getNestedProperty(Object, String)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setNestedProperty-java.lang.Object-java.lang.String-java.lang.Object-">PropertyUtils.setNestedProperty(Object, String, Object)</a></li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String lastName = (String) PropertyUtils.getNestedProperty(nestedBean,<span class="string">&quot;mapProperty(testKey).lastName&quot;</span>);</span><br><span class="line">String lastName2 = (String) PropertyUtils.getNestedProperty(nestedBean,<span class="string">&quot;listProperty[0].lastName&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>访问所有类型的Bean属性</li>
+</ol>
+<p>通过以上API的使用，我们了解了各类bean属性的访问方法，其实还有一种通用的方法，适用于各类bean属性类型</p>
+<ul>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#getProperty-java.lang.Object-java.lang.String-">PropertyUtils.getProperty(Object, String)</a></li>
+<li><a href="http://commons.apache.org/proper/commons-beanutils/javadocs/v1.9.3/apidocs/org/apache/commons/beanutils/PropertyUtils.html#setProperty-java.lang.Object-java.lang.String-java.lang.Object-">PropertyUtils.setProperty(Object, String, Object)</a></li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">PropertyUtils.setProperty(nestedBean, <span class="string">&quot;listProperty[0].lastName&quot;</span>, <span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>apache-common</category>
+      </categories>
+      <tags>
+        <tag>apache-common-beanutils</tag>
+      </tags>
   </entry>
 </search>
