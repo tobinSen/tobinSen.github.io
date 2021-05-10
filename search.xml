@@ -321,9 +321,9 @@
   </entry>
   <entry>
     <title>Apache-Collections</title>
-    <url>/2021/05/11/Apache-collections/</url>
+    <url>/2021/05/11/Apache-Collections/</url>
     <content><![CDATA[<p>简介：Apache-common Collections提供了很多的基于集合间的操作</p>
-<img src="/2021/05/11/Apache-collections/Apache-Collections" style="zoom: 50%;">
+<img src="/2021/05/11/Apache-Collections/Apache-Collections.png" style="zoom: 50%;">
 
 <a id="more"></a>
 
@@ -350,7 +350,7 @@
 </li>
 <li><p>SortedBag</p>
 <p>  AbstractSortedBagDecorator</p>
-<pre><code>      CollectionSortedBag</code></pre>
+<pre><code>  CollectionSortedBag</code></pre>
 <p>   UnmodifiableSortedBag</p>
 </li>
 <li><p>PredicatedSortedBag</p>
