@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-center-atom.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"a6one.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="简介：Apache-common Collections提供了很多的基于集合间的操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache-Collections">
+<meta property="og:url" content="http://a6one.github.io/2021/05/11/Apache-collections/index.html">
+<meta property="og:site_name" content="动人の橘子">
+<meta property="og:description" content="简介：Apache-common Collections提供了很多的基于集合间的操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://a6one.github.io/2021/05/11/Apache-collections/Apache-Collections">
+<meta property="article:published_time" content="2021-05-11T03:52:34.000Z">
+<meta property="article:modified_time" content="2020-05-11T04:00:00.000Z">
+<meta property="article:author" content="a6one">
+<meta property="article:tag" content="apache-common-Collections">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://a6one.github.io/2021/05/11/Apache-collections/Apache-Collections">
+
+<link rel="canonical" href="http://a6one.github.io/2021/05/11/Apache-collections/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Apache-Collections | 动人の橘子</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a target="_blank" rel="noopener" href="https://github.com/a6one" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">动人の橘子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Give it a try</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/05/11/Apache-collections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.png">
+      <meta itemprop="name" content="a6one">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="动人の橘子">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Apache-Collections
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-11 11:52:34" itemprop="dateCreated datePublished" datetime="2021-05-11T11:52:34+08:00">2021-05-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-11 12:00:00" itemprop="dateModified" datetime="2020-05-11T12:00:00+08:00">2020-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/apache-common/" itemprop="url" rel="index"><span itemprop="name">apache-common</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/05/11/Apache-collections/" class="post-meta-item leancloud_visitors" data-flag-title="Apache-Collections" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/05/11/Apache-collections/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/11/Apache-collections/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>27k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>简介：Apache-common Collections提供了很多的基于集合间的操作</p>
+<img src="/2021/05/11/Apache-collections/Apache-Collections" style="zoom: 50%;">
+
+<a id="more"></a>
+
+<h2 id="Bag"><a href="#Bag" class="headerlink" title="Bag"></a>Bag</h2><p>用于操作袋，统计袋中元素</p>
+<p>实现类：</p>
+<ul>
+<li><p>AbstractBagDecorator</p>
+<p>  AbstractSortedBagDecorator</p>
+<ul>
+<li><p>CollectionSortedBag</p>
+</li>
+<li><p>UnmodifiableSortedBag</p>
+<p>CollectionBag</p>
+<p>UnmodifiableBag</p>
+</li>
+</ul>
+</li>
+<li><p>AbstractMapBag</p>
+<p>  HashBag</p>
+<p>  TreeBag</p>
+</li>
+<li><p>PredicatedBag</p>
+<p>  PredicatedSortedBag</p>
+</li>
+<li><p>SortedBag</p>
+<p>  AbstractSortedBagDecorator</p>
+<pre><code>      CollectionSortedBag</code></pre>
+<p>   UnmodifiableSortedBag</p>
+</li>
+<li><p>PredicatedSortedBag</p>
+<p>   SynchronizedSortedBag</p>
+<p>   TransformedSortedBag</p>
+<p>   TreeBag</p>
+</li>
+<li><p>SynchronizedBag</p>
+</li>
+<li><p>SynchronizedSortedBag</p>
+</li>
+<li><p>TransformedBag</p>
+<p>  TransformedSortedBag</p>
+<p> 提供工具类：<code>BagUtils</code></p>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BagUtil常见方法 </span></span><br><span class="line">org.apache.commons.collections4.BagUtils#synchronizedBag(Bag)  // 将一个bag转换为一个同步的bag(线程安全)</span><br><span class="line">org.apache.commons.collections4.BagUtils#unmodifiableBag(Bag)  // 将一个bag转换为一个不可变的bag</span><br><span class="line">org.apache.commons.collections4.BagUtils#predicatedBag(Bag)    // 将断言应用到每个bag中，断言成立才会添加到bag中</span><br><span class="line">org.apache.commons.collections4.BagUtils#transformingBag(Bag)  // 将function应用到每个bag中进行转换后添加</span><br><span class="line">org.apache.commons.collections4.BagUtils#collectionBag(Bag)    // 返回一个bag集合</span><br><span class="line"></span><br><span class="line">org.apache.commons.collections4.BagUtils#synchronizedSortedBag(SortBag)  // 将一个sortBag转为同步的sortBag</span><br><span class="line">org.apache.commons.collections4.BagUtils#unmodifiableBag(SortBag)        // 将一个SortBag转换为一个不可变的SortBag</span><br><span class="line">org.apache.commons.collections4.BagUtils#predicatedBag(SortBag)          // 将断言应用到每个SortBag中，断言成立才会添加到SortBag中</span><br><span class="line">org.apache.commons.collections4.BagUtils#transformingBag(SortBag)        // 将function应用到每个SortBag中进行转换后添加</span><br><span class="line">org.apache.commons.collections4.BagUtils#collectionBag(SortBag)          // 返回一个bag集合</span><br><span class="line"></span><br><span class="line">org.apache.commons.collections4.BagUtils#emptyBag()             // 返回一个空bag</span><br><span class="line">org.apache.commons.collections4.BagUtils#emptySortedBag()       // 返回一个空sortBag</span><br></pre></td></tr></table></figure>
+
+<h3 id="TreeBag-amp-TreeBag"><a href="#TreeBag-amp-TreeBag" class="headerlink" title="TreeBag &amp; TreeBag"></a>TreeBag &amp; TreeBag</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.bag.AbstractMapBag#getCount(Object)     // 获取元素在Map中出现的个数</span><br><span class="line">org.apache.commons.collections4.bag.AbstractMapBag#add(E)               // 在HashBag中添加，含有欺骗性只会存储一个元素用count统计存储量</span><br><span class="line">org.apache.commons.collections4.bag.AbstractMapBag#remove(java.lang.Object) // 删除元素</span><br><span class="line">org.apache.commons.collections4.bag.AbstractMapBag#uniqueSet()          // 返回map中的keyset</span><br></pre></td></tr></table></figure>
+
+<h3 id="CollectionBag-amp-CollectionSortedBag"><a href="#CollectionBag-amp-CollectionSortedBag" class="headerlink" title="CollectionBag &amp; CollectionSortedBag"></a>CollectionBag &amp; CollectionSortedBag</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.bag.CollectionBag#containsAll(Collection)      // 判断bag是否包含collection中所有元素</span><br><span class="line">org.apache.commons.collections4.bag.CollectionBag#add(E)                       // 集合bag中添加元素</span><br><span class="line">org.apache.commons.collections4.bag.CollectionBag#addAll(Collection)           // 集合bag中添加一个集合</span><br><span class="line">org.apache.commons.collections4.bag.CollectionBag#remove(E)                    // 集合bag中删除一个元素</span><br><span class="line">org.apache.commons.collections4.bag.CollectionBag#removeAll(Collection)        // 删除元素在bag集合中的所有</span><br><span class="line">org.apache.commons.collections4.bag.CollectionBag#retainAll(Collection)        // 求交集</span><br><span class="line">org.apache.commons.collections4.bag.CollectionBag#add(E, int)                  // 添加几个元素</span><br></pre></td></tr></table></figure>
+
+<h3 id="SynchronizedBag-amp-SynchronizedSortedBag"><a href="#SynchronizedBag-amp-SynchronizedSortedBag" class="headerlink" title="SynchronizedBag &amp; SynchronizedSortedBag"></a>SynchronizedBag &amp; SynchronizedSortedBag</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(<span class="keyword">final</span> E object, <span class="keyword">final</span> <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">        <span class="keyword">return</span> getBag().add(object, count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 删除方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(<span class="keyword">final</span> Object object, <span class="keyword">final</span> <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (lock) &#123;</span><br><span class="line">        <span class="keyword">return</span> getBag().remove(object, count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UnmodifiableBag-amp-UnmodifiableSortedBag"><a href="#UnmodifiableBag-amp-UnmodifiableSortedBag" class="headerlink" title="UnmodifiableBag &amp; UnmodifiableSortedBag"></a>UnmodifiableBag &amp; UnmodifiableSortedBag</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(<span class="keyword">final</span> E object, <span class="keyword">final</span> <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="PredicatedBag-amp-PredicatedSortedBag"><a href="#PredicatedBag-amp-PredicatedSortedBag" class="headerlink" title="PredicatedBag &amp; PredicatedSortedBag"></a>PredicatedBag &amp; PredicatedSortedBag</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(<span class="keyword">final</span> E object, <span class="keyword">final</span> <span class="keyword">int</span> count)</span> </span>&#123;</span><br><span class="line">    validate(object);         <span class="comment">// 只有验证成功后，才能添加进去</span></span><br><span class="line">    <span class="keyword">return</span> decorated().add(object, count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="TransformedBag-amp-TransformedSortedBag"><a href="#TransformedBag-amp-TransformedSortedBag" class="headerlink" title="TransformedBag &amp; TransformedSortedBag"></a>TransformedBag &amp; TransformedSortedBag</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">add</span><span class="params">(<span class="keyword">final</span> E object, <span class="keyword">final</span> <span class="keyword">int</span> nCopies)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getBag().add(transform(object), nCopies);       <span class="comment">// 每天一个元素都要经过transform进行转换</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="BidiMap"><a href="#BidiMap" class="headerlink" title="BidiMap"></a>BidiMap</h2><p> 用于通过key查询value，通过value也能查询到key的场景。<code>BidiMap</code> 通过key列唯一、value列唯一来保证。</p>
+<p> 常见实现类：<code>DualHashBidiMap</code>、<code>DualLinkedHashBidiMap</code>、<code>DualTreeBidiMap</code>、<code>TreeBidiMap</code></p>
+<h3 id="DualHashBidiMap-amp-DualLinkedHashBidiMap-amp-DualTreeBidiMap"><a href="#DualHashBidiMap-amp-DualLinkedHashBidiMap-amp-DualTreeBidiMap" class="headerlink" title="DualHashBidiMap &amp; DualLinkedHashBidiMap &amp; DualTreeBidiMap"></a>DualHashBidiMap &amp; DualLinkedHashBidiMap &amp; DualTreeBidiMap</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 三个map对应三种不同的实现类，其中BidiMap中通过两个map存储key与value的映射</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Normal delegate map.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> Map&lt;K, V&gt; normalMap;         <span class="comment">// 存储key和value的映射</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Reverse delegate map.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">transient</span> Map&lt;V, K&gt; reverseMap;        <span class="comment">// 存储value和key的映射</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 公共的添加逻辑</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(<span class="keyword">final</span> K key, <span class="keyword">final</span> V value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (normalMap.containsKey(key)) &#123;            <span class="comment">// 判断是否存在key，存在的话就删除value对应的key,保证key列和value列唯一</span></span><br><span class="line">        reverseMap.remove(normalMap.get(key));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (reverseMap.containsKey(value)) &#123;</span><br><span class="line">        normalMap.remove(reverseMap.get(value));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">final</span> V obj = normalMap.put(key, value);</span><br><span class="line">    reverseMap.put(value, key);</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>UnmodifiableBidiMap</code> 、<code>UnmodifiableOrderedBidiMap</code>、<code>UnmodifiableSortedBidiMap</code> 是三种不可变的类型<br><code>TreeBidiMap</code> 基于红黑树来实现的bidiMap</p>
+<h2 id="BloomFilter"><a href="#BloomFilter" class="headerlink" title="BloomFilter"></a>BloomFilter</h2><p>布隆过滤器。 核心实现类 </p>
+<p>  <code>AbstractBloomFilter</code> </p>
+<p> <code>ArrayCountingBloomFilter</code></p>
+<p> <code>BitSetBloomFilter</code></p>
+<p> <code>HasherBloomFilter</code></p>
+<p>  <code>CountingBloomFilter</code></p>
+<p><code>ArrayCountingBloomFilter</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 核心方法</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取此筛选器的形状</span></span><br><span class="line"><span class="comment"> * Gets the shape of this filter.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> the shape of this filter 这个过滤器的形状</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Shape <span class="title">getShape</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取表示此筛选器位的小端长值数组。</span></span><br><span class="line"><span class="comment"> * Gets an array of little-endian long values representing the bits of this filter.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 返回的数组将有长度&#123;<span class="doctag">@code</span> ceil(m / 64)&#125;，其中&#123;<span class="doctag">@code</span> m&#125;是在过滤器和&#123;<span class="doctag">@code</span> ceil&#125;是ceiling函数的位数。</span></span><br><span class="line"><span class="comment"> * 第一个长为0-63位。位位置的值为1表示该位索引已启用。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">long</span>[] getBits();</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建一个包含在过滤器中的位的索引的StaticHasher</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> a StaticHasher for that produces this Bloom filter</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">StaticHasher <span class="title">getHasher</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 如果该筛选器包含指定的筛选器返回true</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(BloomFilter other)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 如果该筛选器包含指定的分解后的Bloom筛选器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Hasher hasher)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Modification Operations</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将指定的Bloom过滤器合并到此Bloom过滤器中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">merge</span><span class="params">(BloomFilter other)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将指定的分解后的Bloom过滤器合并到此Bloom过滤器中特别是所有</span></span><br><span class="line"><span class="comment"> * 由&#123;<span class="doctag">@code</span> hasher&#125;标识的位索引将在这个过滤器中启用。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">merge</span><span class="params">(Hasher hasher)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Counting Operations</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Gets the cardinality (number of enabled bits) of this Bloom filter.</span></span><br><span class="line"><span class="comment"> * 获取此Bloom过滤器的基数(启用的位数)。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cardinality</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用另一个Bloom过滤器执行逻辑“与”，并返回基数(启用的位数)的结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">andCardinality</span><span class="params">(BloomFilter other)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用另一个Bloom过滤器执行逻辑“或”，并返回基数(启用的位数)的结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">orCardinality</span><span class="params">(BloomFilter other)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用另一个Bloom过滤器执行逻辑“异或”，并返回基数(启用的位数)的结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">xorCardinality</span><span class="params">(BloomFilter other)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="BoundedCollection"><a href="#BoundedCollection" class="headerlink" title="BoundedCollection"></a>BoundedCollection</h2><p>创建一个固定容量的集合,其实现类有<code>CircularFifoQueue</code> 、<code>FixedSizeList</code>、<code>UnmodifiableBoundedCollection</code></p>
+<h3 id="CircularFifoQueue"><a href="#CircularFifoQueue" class="headerlink" title="CircularFifoQueue"></a>CircularFifoQueue</h3><p>一个基于FIFO先进先出的固定容量的队列，如果容量满则会删除旧的数据</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#isAtFullCapacity()    // 判断容器是否已满</span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#add(E)                // 添加元素，如果队列满了则会进行循环覆盖</span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#get(int)              // 根据索引获取元素</span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#offer(E)              // 添加元素</span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#poll()                // 移除一个元素</span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#element()             // 返回一个元素</span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#peek()                // 返回一个元素</span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#remove()              // 移除一个元素</span><br><span class="line">org.apache.commons.collections4.queue.CircularFifoQueue#iterator()            // 获取一个迭代器</span><br></pre></td></tr></table></figure>
+
+<h3 id="FixedSizeList"><a href="#FixedSizeList" class="headerlink" title="FixedSizeList"></a>FixedSizeList</h3><p>用于操作固定容器的集合，不知道write操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增操作</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> index, <span class="keyword">final</span> E object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> unsupportedOperationException();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取操作</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> decorated().get(index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UnmodifiableBoundedCollection"><a href="#UnmodifiableBoundedCollection" class="headerlink" title="UnmodifiableBoundedCollection"></a>UnmodifiableBoundedCollection</h3><p>操作不可变集合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增操作</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> index, <span class="keyword">final</span> E object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> unsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="BoundedMap"><a href="#BoundedMap" class="headerlink" title="BoundedMap"></a>BoundedMap</h2><p>用于定义一个固定容量的map，其实现类有<code>FixedSizeMap</code> 、<code>FixedSizeSortedMap</code>、<code>LRUMap</code>、<code>SingletonMap</code></p>
+<h3 id="FixedSizeMap"><a href="#FixedSizeMap" class="headerlink" title="FixedSizeMap"></a>FixedSizeMap</h3><p>只能新增已经存在的key-value</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(<span class="keyword">final</span> K key, <span class="keyword">final</span> V value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (map.containsKey(key) == <span class="keyword">false</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Cannot put new key/value pair - Map is fixed size&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> map.put(key, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FixedSizeSortedMap"><a href="#FixedSizeSortedMap" class="headerlink" title="FixedSizeSortedMap"></a>FixedSizeSortedMap</h3><p>基于sortedMap的实现，只能添加已经存在的key-value</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(<span class="keyword">final</span> K key, <span class="keyword">final</span> V value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (map.containsKey(key) == <span class="keyword">false</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Cannot put new key/value pair - Map is fixed size&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> map.put(key, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SingletonMap"><a href="#SingletonMap" class="headerlink" title="SingletonMap"></a>SingletonMap</h3><p>只有一个key-value</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(<span class="keyword">final</span> K key, <span class="keyword">final</span> V value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isEqualKey(key)) &#123;</span><br><span class="line">        <span class="keyword">return</span> setValue(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Cannot put new key/value pair - Map is fixed size singleton&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(<span class="keyword">final</span> Object key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isEqualKey(key)) &#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ClosureUtils"><a href="#ClosureUtils" class="headerlink" title="ClosureUtils"></a>ClosureUtils</h2><p>用于封装函数式接口，用于多样的使用</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.ClosureUtils#exceptionClosure()     // 返回一个exceptionClosure的函数接口总是抛出异常</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#nopClosure()           // 返回一个nopClosure不做任务处理</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#asClosure(Transformer) // 返回一个封装了Transformer接口的closure</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#forClosure(int,Closure)// 返回一个closure执行count次数</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#whileClosure(Predicate,Closure) // 返回只有Predicate成立就一直执行closure</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#doWhileClosure(Predicate,Closure) // 返回一个至少执行一次的closure</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#invokerClosure(java.lang.String) // 传入methodName然后在Transformer中反射调用这个方法</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#invokerClosure(java.lang.String, java.lang.Class&lt;?&gt;[], java.lang.Object[]) // 传入methodName然后在Transformer中反射调用这个方法</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#chainedClosure(org.apache.commons.collections4.Closure&lt;? super E&gt;...) // 循环执行这些closure接口</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#ifClosure(org.apache.commons.collections4.Predicate&lt;? super E&gt;, org.apache.commons.collections4.Closure&lt;? super E&gt;) // 只有Predicate成立才会执行CLosure</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#ifClosure(org.apache.commons.collections4.Predicate&lt;? super E&gt;, org.apache.commons.collections4.Closure&lt;? super E&gt;, org.apache.commons.collections4.Closure&lt;? super E&gt;) // 成立就执行trueClosure否则falseClosure</span><br><span class="line">org.apache.commons.collections4.ClosureUtils#switchClosure(org.apache.commons.collections4.Predicate&lt;? super E&gt;[], org.apache.commons.collections4.Closure&lt;? super E&gt;[])  // 每个predicate执行一个Closure     </span><br></pre></td></tr></table></figure>
+
+<h3 id="CatchAndRethrowClosure"><a href="#CatchAndRethrowClosure" class="headerlink" title="CatchAndRethrowClosure"></a>CatchAndRethrowClosure</h3><p>用于抛出异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">CatchAndRethrowClosure</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">Closure</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Execute this closure on the specified input object.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> input the input to execute on</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> FunctorException (runtime) if the closure execution resulted in a</span></span><br><span class="line"><span class="comment">     *             checked exception.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(<span class="keyword">final</span> E input)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            executeAndThrow(input);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="keyword">final</span> RuntimeException ex) &#123;</span><br><span class="line">            <span class="keyword">throw</span> ex;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="keyword">final</span> Throwable t) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> FunctorException(t);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Execute this closure on the specified input object.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> input the input to execute on</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Throwable if the closure execution resulted in a checked</span></span><br><span class="line"><span class="comment">     *             exception.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">executeAndThrow</span><span class="params">(E input)</span> <span class="keyword">throws</span> Throwable</span>;      <span class="comment">// 自行实现抛出异常</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ChainedClosure"><a href="#ChainedClosure" class="headerlink" title="ChainedClosure"></a>ChainedClosure</h3><p>用于将多个closure进行执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function">Closure&lt;E&gt; <span class="title">chainedClosure</span><span class="params">(<span class="keyword">final</span> Closure&lt;? <span class="keyword">super</span> E&gt;... closures)</span> </span>&#123;</span><br><span class="line">        FunctorUtils.validate(closures);</span><br><span class="line">        <span class="keyword">if</span> (closures.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> NOPClosure.&lt;E&gt;nopClosure();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ChainedClosure&lt;&gt;(closures);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(<span class="keyword">final</span> E input)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">final</span> Closure&lt;? <span class="keyword">super</span> E&gt; iClosure : iClosures) &#123;</span><br><span class="line">        iClosure.execute(input);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ForClosure"><a href="#ForClosure" class="headerlink" title="ForClosure"></a>ForClosure</h3><p>循环执行closure</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function">Closure&lt;E&gt; <span class="title">forClosure</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> count, <span class="keyword">final</span> Closure&lt;? <span class="keyword">super</span> E&gt; closure)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (count &lt;= <span class="number">0</span> || closure == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> NOPClosure.&lt;E&gt;nopClosure();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (Closure&lt;E&gt;) closure;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ForClosure&lt;&gt;(count, closure);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(<span class="keyword">final</span> E input)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; iCount; i++) &#123;</span><br><span class="line">        iClosure.execute(input);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="IfClosure"><a href="#IfClosure" class="headerlink" title="IfClosure"></a>IfClosure</h3><p>基于if…else的方式执行closure</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function">Closure&lt;E&gt; <span class="title">ifClosure</span><span class="params">(<span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> E&gt; predicate, <span class="keyword">final</span> Closure&lt;? <span class="keyword">super</span> E&gt; trueClosure)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> IfClosure.&lt;E&gt;ifClosure(predicate, trueClosure, NOPClosure.&lt;E&gt;nopClosure());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(<span class="keyword">final</span> E input)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (iPredicate.evaluate(input)) &#123;</span><br><span class="line">        iTrueClosure.execute(input);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        iFalseClosure.execute(input);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CollectionUtils"><a href="#CollectionUtils" class="headerlink" title="CollectionUtils"></a>CollectionUtils</h2><p>用于操作集合</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.CollectionUtils#emptyCollection()        // 返回一个空集合</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#emptyIfNull(Collection)  // 如果是空就返回空集合，否则直接返回</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#union(Iterable,Iterable) // 合并两个集合内容</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#intersection(Iterable,Iterable) // 返回这两个集合</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#subtract(java.lang.Iterable&lt;? extends O&gt;, java.lang.Iterable&lt;? extends O&gt;)  // 两集合相减返回剩余的部分</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#containsAll(Collectin,Collectin) // 一个集合包含另一个集合</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#containsAny(java.util.Collection&lt;?&gt;, java.util.Collection&lt;?&gt;)  // 一个集合包含另一个集合部分</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#getCardinalityMap(Iterable)    // 将集合转换为map,并返回Map&lt;Obje,count&gt; 出现的次数</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#filter(Collection,Filter)      // 进行集合过滤</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#transform(Collection,Transform) // 对集合中的每个元素进行过滤</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#select(java.lang.Iterable&lt;? extends O&gt;, org.apache.commons.collections4.Predicate&lt;? super O&gt;) // 返回符合条件的集合</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#selectRejected(java.lang.Iterable&lt;? extends O&gt;, org.apache.commons.collections4.Predicate&lt;? super O&gt;) // 返回没有符合条件的集合</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#collect(java.lang.Iterable&lt;I&gt;, org.apache.commons.collections4.Transformer&lt;? super I,? extends O&gt;) // 返回每个元素被转换后的集合</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#addIgnoreNull(T)      // 添加不为null的元素</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#reverseArray(T[])     // 数组逆序</span><br><span class="line">org.apache.commons.collections4.CollectionUtils#collate(java.lang.Iterable&lt;? extends O&gt;, java.lang.Iterable&lt;? extends O&gt;)  // 将两个集合合并</span><br></pre></td></tr></table></figure>
+
+<h3 id="PredicatedList"><a href="#PredicatedList" class="headerlink" title="PredicatedList"></a>PredicatedList</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 断言为true的才会添加</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="title">PredicatedList</span><span class="params">(<span class="keyword">final</span> List&lt;E&gt; list, <span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> E&gt; predicate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(list, predicate);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="SetUniqueList"><a href="#SetUniqueList" class="headerlink" title="SetUniqueList"></a>SetUniqueList</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加唯一元素</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function">SetUniqueList&lt;E&gt; <span class="title">setUniqueList</span><span class="params">(<span class="keyword">final</span> List&lt;E&gt; list)</span> </span>&#123;</span><br><span class="line">        Objects.requireNonNull(list, <span class="string">&quot;list&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (list.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> SetUniqueList&lt;&gt;(list, <span class="keyword">new</span> HashSet&lt;E&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">final</span> List&lt;E&gt; temp = <span class="keyword">new</span> ArrayList&lt;&gt;(list);</span><br><span class="line">        list.clear();</span><br><span class="line">        <span class="keyword">final</span> SetUniqueList&lt;E&gt; sl = <span class="keyword">new</span> SetUniqueList&lt;&gt;(list, <span class="keyword">new</span> HashSet&lt;E&gt;());</span><br><span class="line">        sl.addAll(temp);</span><br><span class="line">        <span class="keyword">return</span> sl;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="TransformedList"><a href="#TransformedList" class="headerlink" title="TransformedList"></a>TransformedList</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用于转换</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function">TransformedList&lt;E&gt; <span class="title">transformedList</span><span class="params">(<span class="keyword">final</span> List&lt;E&gt; list,</span></span></span><br><span class="line"><span class="function"><span class="params">     <span class="keyword">final</span> Transformer&lt;? <span class="keyword">super</span> E, ? extends E&gt; transformer)</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ComparatorUtils"><a href="#ComparatorUtils" class="headerlink" title="ComparatorUtils"></a>ComparatorUtils</h2><p>用于比较操作</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.ComparatorUtils#naturalComparator()     // 获取自然排序</span><br><span class="line">org.apache.commons.collections4.ComparatorUtils#chainedComparator(java.util.Comparator&lt;E&gt;...)  // 排序链</span><br><span class="line">org.apache.commons.collections4.ComparatorUtils#reversedComparator(Comparator)  // 逆序</span><br><span class="line">org.apache.commons.collections4.ComparatorUtils#booleanComparator(trueFirst)    // 排序boolean类型。true则表示true的值排序到最前面</span><br><span class="line">org.apache.commons.collections4.ComparatorUtils#nullLowComparator(Comparator)   // 用于比较含有null值的数据</span><br><span class="line">org.apache.commons.collections4.ComparatorUtils#transformedComparator(Comparator,Transform) // 将元素transform转换后再进行比较</span><br><span class="line">org.apache.commons.collections4.ComparatorUtils#max(int,int,Comparator)      // 求两个元素中最大值</span><br><span class="line">org.apache.commons.collections4.ComparatorUtils#min(int,int,Comparator)      // 求两个元素中最小值</span><br></pre></td></tr></table></figure>
+
+<h3 id="BooleanComparator"><a href="#BooleanComparator" class="headerlink" title="BooleanComparator"></a>BooleanComparator</h3><p>用于比较boolean类型比较器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">final</span> Boolean b1, <span class="keyword">final</span> Boolean b2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">boolean</span> v1 = b1.booleanValue();</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">boolean</span> v2 = b2.booleanValue();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (v1 ^ v2) ? ( (v1 ^ trueFirst) ? <span class="number">1</span> : -<span class="number">1</span> ) : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FixedOrderComparator"><a href="#FixedOrderComparator" class="headerlink" title="FixedOrderComparator"></a>FixedOrderComparator</h3><p>可以用来还原排序，记录一个排序的快照</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] planets = &#123;<span class="string">&quot;Mercury&quot;</span>, <span class="string">&quot;Venus&quot;</span>, <span class="string">&quot;Earth&quot;</span>, <span class="string">&quot;Mars&quot;</span>&#125;;</span><br><span class="line">FixedOrderComparator distanceFromSun = <span class="keyword">new</span> FixedOrderComparator(planets);    <span class="comment">// 记录每个元素的位置，其实有一个全局的map记录</span></span><br><span class="line">Arrays.sort(planets);   <span class="comment">// 自然排序</span></span><br><span class="line">Arrays.sort(planets, distanceFromSun);  <span class="comment">// 恢复排序</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="NullComparator"><a href="#NullComparator" class="headerlink" title="NullComparator"></a>NullComparator</h3><p>值存在为null时候的排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">final</span> E o1, <span class="keyword">final</span> E o2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (o1 == o2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (o1 == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.nullsAreHigh ? <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (o2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.nullsAreHigh ? -<span class="number">1</span> : <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.nonNullComparator.compare(o1, o2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ReverseComparator"><a href="#ReverseComparator" class="headerlink" title="ReverseComparator"></a>ReverseComparator</h3><p>逆序排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">final</span> E obj1, <span class="keyword">final</span> E obj2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> comparator.compare(obj2, obj1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="TransformingComparator"><a href="#TransformingComparator" class="headerlink" title="TransformingComparator"></a>TransformingComparator</h3><p>对比较对象转换后再比较</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">final</span> I obj1, <span class="keyword">final</span> I obj2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> O value1 = <span class="keyword">this</span>.transformer.transform(obj1);</span><br><span class="line">    <span class="keyword">final</span> O value2 = <span class="keyword">this</span>.transformer.transform(obj2);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.decorated.compare(value1, value2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="EnumerationUtils"><a href="#EnumerationUtils" class="headerlink" title="EnumerationUtils"></a>EnumerationUtils</h2><p>用于操作枚举</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.EnumerationUtils#asIterable(Enumeration)     // 枚举转为迭代器</span><br><span class="line">org.apache.commons.collections4.EnumerationUtils#get(Enumeration,int)        // 枚举中获取第几个元素</span><br><span class="line">org.apache.commons.collections4.EnumerationUtils#toList(java.util.Enumeration&lt;? extends E&gt;) // 枚举转换为集合</span><br><span class="line">org.apache.commons.collections4.EnumerationUtils#toList(java.util.StringTokenizer) // 使用stringTokenizer转换为集合</span><br></pre></td></tr></table></figure>
+
+<h2 id="FactoryUtils"><a href="#FactoryUtils" class="headerlink" title="FactoryUtils"></a>FactoryUtils</h2><p>用于获取工厂接口</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.FactoryUtils#exceptionFactory()    // 返回一个异常的工厂</span><br><span class="line">org.apache.commons.collections4.FactoryUtils#constantFactory(T)    // 返回一个返回常量的工厂</span><br><span class="line">org.apache.commons.collections4.FactoryUtils#prototypeFactory()    // 返回一个调用属性的工厂</span><br><span class="line">org.apache.commons.collections4.FactoryUtils#instantiateFactory(java.lang.Class&lt;T&gt;) // 返回一个实例化的工厂</span><br></pre></td></tr></table></figure>
+
+<h2 id="FluentIterable"><a href="#FluentIterable" class="headerlink" title="FluentIterable"></a>FluentIterable</h2><p>用于操作迭代器</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.FluentIterable#append(E...)     // 追加元素</span><br><span class="line">org.apache.commons.collections4.FluentIterable#collate(java.lang.Iterable&lt;? extends E&gt;) // 添加元素到迭代器中并会进行自然排序</span><br><span class="line">org.apache.commons.collections4.FluentIterable#collate(java.lang.Iterable&lt;? extends E&gt;, java.util.Comparator&lt;? super E&gt;) // 追加元素指定排序规则</span><br><span class="line">org.apache.commons.collections4.FluentIterable#eval()   // 返回新的FluentIterable内容与之前一致</span><br><span class="line">org.apache.commons.collections4.FluentIterable#filter(Predicate) // 返回Predicate为true的元素</span><br><span class="line">org.apache.commons.collections4.FluentIterable#limit(int)  // 只返回几个值</span><br><span class="line">org.apache.commons.collections4.FluentIterable#loop()      // 返回一个无限循环的迭代器</span><br><span class="line">org.apache.commons.collections4.FluentIterable#reverse()   // 迭代器将逆序遍历元素</span><br><span class="line">org.apache.commons.collections4.FluentIterable#skip(int)   // 迭代器跳过第几个元素的遍历</span><br><span class="line">org.apache.commons.collections4.FluentIterable#transform(Transform) // 对迭代器中的元素进行遍历转换</span><br><span class="line">org.apache.commons.collections4.FluentIterable#unique()    // 返回一个唯一元素的视图</span><br><span class="line">org.apache.commons.collections4.FluentIterable#unmodifiable() // 返回一个不可变视图</span><br><span class="line">org.apache.commons.collections4.FluentIterable#zip(java.lang.Iterable&lt;? extends E&gt;...) // 返回一个交替遍历的迭代器</span><br><span class="line">org.apache.commons.collections4.FluentIterable#allMatch(Predicate)  // 返回是否全部匹配</span><br></pre></td></tr></table></figure>
+
+<h2 id="IterableUtils"><a href="#IterableUtils" class="headerlink" title="IterableUtils"></a>IterableUtils</h2><p>迭代器工具类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.IterableUtils#emptyIterable()   // 返回一个空的迭代器</span><br><span class="line">org.apache.commons.collections4.IterableUtils#chainedIterable(java.lang.Iterable&lt;? extends E&gt;, java.lang.Iterable&lt;? extends E&gt;)  // 结合两个迭代器为一个迭代器</span><br><span class="line">org.apache.commons.collections4.IterableUtils#collatedIterable(java.util.Comparator&lt;? super E&gt;, java.lang.Iterable&lt;? extends E&gt;, java.lang.Iterable&lt;? extends E&gt;) // 结合迭代器的时候进行排序</span><br><span class="line">org.apache.commons.collections4.IterableUtils#filteredIterable(Iterable,Predicate) // 过滤迭代器元素</span><br><span class="line">org.apache.commons.collections4.IterableUtils#boundedIterable(Iterable,int)  // 返回之给定指定数量元素的视图</span><br><span class="line">org.apache.commons.collections4.IterableUtils#forEachButLast(Iterable,Closure) // 就最后一个元素不执行closure，其它元素都执行</span><br><span class="line">org.apache.commons.collections4.IterableUtils#frequency(Iterable,T)    // 返回元素在迭代器中出现的频率</span><br><span class="line">org.apache.commons.collections4.IterableUtils#first()     // 获取第一个元素</span><br></pre></td></tr></table></figure>
+
+<h3 id="ArrayIterator"><a href="#ArrayIterator" class="headerlink" title="ArrayIterator"></a>ArrayIterator</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayIterator</span><span class="params">(<span class="keyword">final</span> Object array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(array, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ArrayListIterator"><a href="#ArrayListIterator" class="headerlink" title="ArrayListIterator"></a>ArrayListIterator</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ArrayListIterator</span><span class="params">(<span class="keyword">final</span> Object array)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(array);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FilterIterator"><a href="#FilterIterator" class="headerlink" title="FilterIterator"></a>FilterIterator</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FilterIterator</span><span class="params">(<span class="keyword">final</span> Iterator&lt;? extends E&gt; iterator, <span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> E&gt; predicate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.iterator = iterator;</span><br><span class="line">        <span class="keyword">this</span>.predicate = predicate;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!nextObjectSet &amp;&amp; !setNextObject()) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NoSuchElementException();</span><br><span class="line">    &#125;</span><br><span class="line">    nextObjectSet = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> nextObject;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">setNextObject</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">      <span class="keyword">final</span> E object = iterator.next();</span><br><span class="line">      <span class="keyword">if</span> (predicate.evaluate(object)) &#123;</span><br><span class="line">          nextObject = object;</span><br><span class="line">          nextObjectSet = <span class="keyword">true</span>;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ListUtils"><a href="#ListUtils" class="headerlink" title="ListUtils"></a>ListUtils</h2><p>用于操作list工具类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.ListUtils#intersection(List,List)    // 包含两个集合</span><br><span class="line">org.apache.commons.collections4.ListUtils#subtract(List,List)        // 第一个集合减去第二个集合</span><br><span class="line">org.apache.commons.collections4.ListUtils#lazyList(java.util.List&lt;E&gt;, org.apache.commons.collections4.Factory&lt;? extends E&gt;) // 返回一个惰性的集合，需要的时候在创建</span><br><span class="line">org.apache.commons.collections4.ListUtils#longestCommonSubsequence(java.util.List&lt;E&gt;, java.util.List&lt;E&gt;) // 返回最长的公共子序号</span><br></pre></td></tr></table></figure>
+
+<h2 id="SetUtils"><a href="#SetUtils" class="headerlink" title="SetUtils"></a>SetUtils</h2><p>用于操作set工具类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.SetUtils#difference(S,S)    // 方法两个Set不同的部分</span><br></pre></td></tr></table></figure>
+
+<h2 id="QueueUtils"><a href="#QueueUtils" class="headerlink" title="QueueUtils"></a>QueueUtils</h2><p>用于操作队列的工具类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.QueueUtils#unmodifiableQueue(T) // 返回不可变的队列</span><br><span class="line">org.apache.commons.collections4.QueueUtils#predicatedQueue(Q,P) // 返回满足条件的队列</span><br><span class="line">org.apache.commons.collections4.QueueUtils#transformingQueue(Q,T) // 返回进行转换的队列</span><br></pre></td></tr></table></figure>
+
+<h2 id="MapUtils"><a href="#MapUtils" class="headerlink" title="MapUtils"></a>MapUtils</h2><p>用于操作map工具类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.MapUtils#applyDefaultFunction(java.util.Map&lt;? super K,?&gt;, K, java.util.function.BiFunction&lt;java.util.Map&lt;? super K,?&gt;,K,R&gt;, java.util.function.Function&lt;K,R&gt;)  // 用于获取value时候值为空时候的回调方法</span><br><span class="line">org.apache.commons.collections4.MapUtils#fixedSizeMap(Map)    // 返回一个固定的map</span><br><span class="line">org.apache.commons.collections4.MapUtils#getInteger(java.util.Map&lt;? super K,?&gt;, K) // 获取map值</span><br><span class="line">org.apache.commons.collections4.MapUtils#invertMap()   // 调换key-value的位置</span><br><span class="line">org.apache.commons.collections4.MapUtils#populateMap(java.util.Map&lt;K,V&gt;, java.lang.Iterable&lt;? extends E&gt;, org.apache.commons.collections4.Transformer&lt;E,K&gt;, org.apache.commons.collections4.Transformer&lt;E,V&gt;) // 填充元素</span><br><span class="line"></span><br><span class="line">org.apache.commons.collections4.MapUtils#toMap(ResourceBundle)  // 将ResourceBundle转化为map</span><br><span class="line">org.apache.commons.collections4.MapUtils#toProperties(Map)      // 将map转化为properties</span><br></pre></td></tr></table></figure>
+
+<h3 id="CompositeMap"><a href="#CompositeMap" class="headerlink" title="CompositeMap"></a>CompositeMap</h3><p>用于操作多map</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CompositeMap</span><span class="params">(<span class="keyword">final</span> Map&lt;K, V&gt; one, <span class="keyword">final</span> Map&lt;K, V&gt; two, <span class="keyword">final</span> MapMutator&lt;K, V&gt; mutator)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(<span class="keyword">new</span> Map[] &#123; one, two &#125;, mutator);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="FixedSizeMap-1"><a href="#FixedSizeMap-1" class="headerlink" title="FixedSizeMap"></a>FixedSizeMap</h3><p>只能操作固定map</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(<span class="keyword">final</span> K key, <span class="keyword">final</span> V value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (map.containsKey(key) == <span class="keyword">false</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Cannot put new key/value pair - Map is fixed size&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> map.put(key, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="DefaultKeyValue"><a href="#DefaultKeyValue" class="headerlink" title="DefaultKeyValue"></a>DefaultKeyValue</h3><p>保存key-value</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">DefaultKeyValue</span><span class="params">(<span class="keyword">final</span> K key, <span class="keyword">final</span> V value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(key, value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 设置值</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> K <span class="title">setKey</span><span class="params">(<span class="keyword">final</span> K key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> K old = <span class="keyword">this</span>.key;       <span class="comment">// 引用隔离</span></span><br><span class="line">    <span class="keyword">this</span>.key = key;</span><br><span class="line">    <span class="keyword">return</span> old;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取值</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MultiMapUtils"><a href="#MultiMapUtils" class="headerlink" title="MultiMapUtils"></a>MultiMapUtils</h2><p>操作multiMap的工具类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.MultiMapUtils#getCollection(Map,T) // 返回value集合</span><br><span class="line">org.apache.commons.collections4.MultiMapUtils#newListValuedHashMap() // 返回集合listValue实现</span><br><span class="line">org.apache.commons.collections4.MultiMapUtils#newSetValuedHashMap()  // 返回集合SetValue实现</span><br></pre></td></tr></table></figure>
+
+<h3 id="MultiKey"><a href="#MultiKey" class="headerlink" title="MultiKey"></a>MultiKey</h3><p>操作多key情况</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MultiKey</span><span class="params">(<span class="keyword">final</span> K key1, <span class="keyword">final</span> K key2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(newArray(key1, key2), <span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> K <span class="title">getKey</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> keys[index];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MultiSetUtils"><a href="#MultiSetUtils" class="headerlink" title="MultiSetUtils"></a>MultiSetUtils</h2><p>用于操作MulitSet的工具类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.MultiSetUtils#unmodifiableMultiSet() // 创建不可变MulitSet</span><br><span class="line">org.apache.commons.collections4.MultiSetUtils#predicatedMultiSet(MultiSet,Predicate) // 创建MuliSet符合Predicate条件的</span><br></pre></td></tr></table></figure>
+
+<h3 id="HashMultiSet"><a href="#HashMultiSet" class="headerlink" title="HashMultiSet"></a>HashMultiSet</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMultiSet</span><span class="params">(<span class="keyword">final</span> Collection&lt;? extends E&gt; coll)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>();</span><br><span class="line">        addAll(coll);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="PredicateUtils"><a href="#PredicateUtils" class="headerlink" title="PredicateUtils"></a>PredicateUtils</h2><p>用于操作断言的工具类</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.PredicateUtils#equalPredicate(T)  // 返回断言的</span><br><span class="line">org.apache.commons.collections4.PredicateUtils#andPredicate(T,T)  // 断言全部成立的</span><br><span class="line">org.apache.commons.collections4.PredicateUtils#orPredicate(T,T)   // 至少一个成立的断言</span><br></pre></td></tr></table></figure>
+
+<h3 id="AllPredicate"><a href="#AllPredicate" class="headerlink" title="AllPredicate"></a>AllPredicate</h3><p>用于操作多个Predicate，如果一个不成功就返回false</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建AllPredicate</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Predicate&lt;T&gt; <span class="title">allPredicate</span><span class="params">(<span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> T&gt;... predicates)</span> </span>&#123;</span><br><span class="line">    validate(predicates);</span><br><span class="line">    <span class="keyword">if</span> (predicates.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> truePredicate();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (predicates.length == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> coerce(predicates[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">		<span class="comment">// copy predicates 的好处是【引用隔离】==&gt;【函数式接口】，避免形参引用改变对后续匿名调用产生了影响</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AllPredicate&lt;&gt;(FunctorUtils.copy(predicates));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">evaluate</span><span class="params">(<span class="keyword">final</span> T object)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> T&gt; iPredicate : iPredicates) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!iPredicate.evaluate(object)) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="AndPredicate"><a href="#AndPredicate" class="headerlink" title="AndPredicate"></a>AndPredicate</h3><p>合并两个predicate的和操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建AllPredicate</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Predicate&lt;T&gt; <span class="title">andPredicate</span><span class="params">(<span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> T&gt; predicate1,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> T&gt; predicate2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AndPredicate&lt;&gt;(Objects.requireNonNull(predicate1, <span class="string">&quot;predicate1&quot;</span>),</span><br><span class="line">                Objects.requireNonNull(predicate2, <span class="string">&quot;predicate2&quot;</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">evaluate</span><span class="params">(<span class="keyword">final</span> T object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> iPredicate1.evaluate(object) &amp;&amp; iPredicate2.evaluate(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="AnyPredicate"><a href="#AnyPredicate" class="headerlink" title="AnyPredicate"></a>AnyPredicate</h3><p>任意一个成功就可以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建AnyPredicate</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Predicate&lt;T&gt; <span class="title">anyPredicate</span><span class="params">(<span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> T&gt;... predicates)</span> </span>&#123;</span><br><span class="line">        FunctorUtils.validate(predicates);</span><br><span class="line">        <span class="keyword">if</span> (predicates.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> FalsePredicate.&lt;T&gt;falsePredicate();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (predicates.length == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (Predicate&lt;T&gt;) predicates[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AnyPredicate&lt;&gt;(FunctorUtils.copy(predicates));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">evaluate</span><span class="params">(<span class="keyword">final</span> T object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">final</span> Predicate&lt;? <span class="keyword">super</span> T&gt; iPredicate : iPredicates) &#123;</span><br><span class="line">        <span class="keyword">if</span> (iPredicate.evaluate(object)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ComparatorPredicate"><a href="#ComparatorPredicate" class="headerlink" title="ComparatorPredicate"></a>ComparatorPredicate</h3><p>用于比较的断言</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Predicate&lt;T&gt; <span class="title">comparatorPredicate</span><span class="params">(<span class="keyword">final</span> T object, <span class="keyword">final</span> Comparator&lt;T&gt; comparator)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> comparatorPredicate(object, comparator, Criterion.EQUAL);    <span class="comment">// 对象和比较器</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">evaluate</span><span class="params">(<span class="keyword">final</span> T target)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> comparison = comparator.compare(object, target);</span><br><span class="line">    <span class="keyword">switch</span> (criterion) &#123;</span><br><span class="line">    <span class="keyword">case</span> EQUAL:</span><br><span class="line">        result = comparison == <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> GREATER:</span><br><span class="line">        result = comparison &gt; <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> LESS:</span><br><span class="line">        result = comparison &lt; <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> GREATER_OR_EQUAL:</span><br><span class="line">        result = comparison &gt;= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> LESS_OR_EQUAL:</span><br><span class="line">        result = comparison &lt;= <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">&quot;The current criterion &#x27;&quot;</span> + criterion + <span class="string">&quot;&#x27; is invalid.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="TransformerUtils"><a href="#TransformerUtils" class="headerlink" title="TransformerUtils"></a>TransformerUtils</h2><p>用于操作Transformer的工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.collections4.TransformerUtils#chainedTransformer(org.apache.commons.collections4.Transformer&lt;? super T,? extends T&gt;...)  // 构建多个转换</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="ChainedTransformer"><a href="#ChainedTransformer" class="headerlink" title="ChainedTransformer"></a>ChainedTransformer</h3><p>用于操作多个Transformer的执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Transformer&lt;T, T&gt; <span class="title">chainedTransformer</span><span class="params">(<span class="keyword">final</span> Transformer&lt;? <span class="keyword">super</span> T, ? extends T&gt;... transformers)</span> </span>&#123;</span><br><span class="line">        FunctorUtils.validate(transformers);</span><br><span class="line">        <span class="keyword">if</span> (transformers.length == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> NOPTransformer.&lt;T&gt;nopTransformer();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ChainedTransformer&lt;&gt;(transformers);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">transform</span><span class="params">(T object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">final</span> Transformer&lt;? <span class="keyword">super</span> T, ? extends T&gt; iTransformer : iTransformers) &#123;</span><br><span class="line">        object = iTransformer.transform(object);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> object;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="CloneTransformer"><a href="#CloneTransformer" class="headerlink" title="CloneTransformer"></a>CloneTransformer</h3><p>用于clone的操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">transform</span><span class="params">(<span class="keyword">final</span> T input)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (input == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> PrototypeFactory.prototypeFactory(input).create();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="ClosureTransformer"><a href="#ClosureTransformer" class="headerlink" title="ClosureTransformer"></a>ClosureTransformer</h3><p>用于closure转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">transform</span><span class="params">(<span class="keyword">final</span> T input)</span> </span>&#123;</span><br><span class="line">    iClosure.execute(input);</span><br><span class="line">    <span class="keyword">return</span> input;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="IfTransformer"><a href="#IfTransformer" class="headerlink" title="IfTransformer"></a>IfTransformer</h3><p>用于if…else的转换操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> O <span class="title">transform</span><span class="params">(<span class="keyword">final</span> I input)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (iPredicate.evaluate(input))&#123;</span><br><span class="line">        <span class="keyword">return</span> iTrueTransformer.transform(input);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> iFalseTransformer.transform(input);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/apache-common-Collections/" rel="tag"># apache-common-Collections</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/06/idea-debug/" rel="prev" title="idea多线程调试">
+      <i class="fa fa-chevron-left"></i> idea多线程调试
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bag"><span class="nav-number">1.</span> <span class="nav-text">Bag</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeBag-amp-TreeBag"><span class="nav-number">1.1.</span> <span class="nav-text">TreeBag &amp; TreeBag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CollectionBag-amp-CollectionSortedBag"><span class="nav-number">1.2.</span> <span class="nav-text">CollectionBag &amp; CollectionSortedBag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SynchronizedBag-amp-SynchronizedSortedBag"><span class="nav-number">1.3.</span> <span class="nav-text">SynchronizedBag &amp; SynchronizedSortedBag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UnmodifiableBag-amp-UnmodifiableSortedBag"><span class="nav-number">1.4.</span> <span class="nav-text">UnmodifiableBag &amp; UnmodifiableSortedBag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PredicatedBag-amp-PredicatedSortedBag"><span class="nav-number">1.5.</span> <span class="nav-text">PredicatedBag &amp; PredicatedSortedBag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransformedBag-amp-TransformedSortedBag"><span class="nav-number">1.6.</span> <span class="nav-text">TransformedBag &amp; TransformedSortedBag</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BidiMap"><span class="nav-number">2.</span> <span class="nav-text">BidiMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DualHashBidiMap-amp-DualLinkedHashBidiMap-amp-DualTreeBidiMap"><span class="nav-number">2.1.</span> <span class="nav-text">DualHashBidiMap &amp; DualLinkedHashBidiMap &amp; DualTreeBidiMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BloomFilter"><span class="nav-number">3.</span> <span class="nav-text">BloomFilter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BoundedCollection"><span class="nav-number">4.</span> <span class="nav-text">BoundedCollection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CircularFifoQueue"><span class="nav-number">4.1.</span> <span class="nav-text">CircularFifoQueue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FixedSizeList"><span class="nav-number">4.2.</span> <span class="nav-text">FixedSizeList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UnmodifiableBoundedCollection"><span class="nav-number">4.3.</span> <span class="nav-text">UnmodifiableBoundedCollection</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BoundedMap"><span class="nav-number">5.</span> <span class="nav-text">BoundedMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FixedSizeMap"><span class="nav-number">5.1.</span> <span class="nav-text">FixedSizeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FixedSizeSortedMap"><span class="nav-number">5.2.</span> <span class="nav-text">FixedSizeSortedMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SingletonMap"><span class="nav-number">5.3.</span> <span class="nav-text">SingletonMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ClosureUtils"><span class="nav-number">6.</span> <span class="nav-text">ClosureUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CatchAndRethrowClosure"><span class="nav-number">6.1.</span> <span class="nav-text">CatchAndRethrowClosure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ChainedClosure"><span class="nav-number">6.2.</span> <span class="nav-text">ChainedClosure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ForClosure"><span class="nav-number">6.3.</span> <span class="nav-text">ForClosure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IfClosure"><span class="nav-number">6.4.</span> <span class="nav-text">IfClosure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CollectionUtils"><span class="nav-number">7.</span> <span class="nav-text">CollectionUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PredicatedList"><span class="nav-number">7.1.</span> <span class="nav-text">PredicatedList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SetUniqueList"><span class="nav-number">7.2.</span> <span class="nav-text">SetUniqueList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransformedList"><span class="nav-number">7.3.</span> <span class="nav-text">TransformedList</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ComparatorUtils"><span class="nav-number">8.</span> <span class="nav-text">ComparatorUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BooleanComparator"><span class="nav-number">8.1.</span> <span class="nav-text">BooleanComparator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FixedOrderComparator"><span class="nav-number">8.2.</span> <span class="nav-text">FixedOrderComparator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NullComparator"><span class="nav-number">8.3.</span> <span class="nav-text">NullComparator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReverseComparator"><span class="nav-number">8.4.</span> <span class="nav-text">ReverseComparator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TransformingComparator"><span class="nav-number">8.5.</span> <span class="nav-text">TransformingComparator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EnumerationUtils"><span class="nav-number">9.</span> <span class="nav-text">EnumerationUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FactoryUtils"><span class="nav-number">10.</span> <span class="nav-text">FactoryUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FluentIterable"><span class="nav-number">11.</span> <span class="nav-text">FluentIterable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IterableUtils"><span class="nav-number">12.</span> <span class="nav-text">IterableUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayIterator"><span class="nav-number">12.1.</span> <span class="nav-text">ArrayIterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayListIterator"><span class="nav-number">12.2.</span> <span class="nav-text">ArrayListIterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FilterIterator"><span class="nav-number">12.3.</span> <span class="nav-text">FilterIterator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListUtils"><span class="nav-number">13.</span> <span class="nav-text">ListUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetUtils"><span class="nav-number">14.</span> <span class="nav-text">SetUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QueueUtils"><span class="nav-number">15.</span> <span class="nav-text">QueueUtils</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MapUtils"><span class="nav-number">16.</span> <span class="nav-text">MapUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CompositeMap"><span class="nav-number">16.1.</span> <span class="nav-text">CompositeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FixedSizeMap-1"><span class="nav-number">16.2.</span> <span class="nav-text">FixedSizeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DefaultKeyValue"><span class="nav-number">16.3.</span> <span class="nav-text">DefaultKeyValue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MultiMapUtils"><span class="nav-number">17.</span> <span class="nav-text">MultiMapUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MultiKey"><span class="nav-number">17.1.</span> <span class="nav-text">MultiKey</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MultiSetUtils"><span class="nav-number">18.</span> <span class="nav-text">MultiSetUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HashMultiSet"><span class="nav-number">18.1.</span> <span class="nav-text">HashMultiSet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PredicateUtils"><span class="nav-number">19.</span> <span class="nav-text">PredicateUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AllPredicate"><span class="nav-number">19.1.</span> <span class="nav-text">AllPredicate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AndPredicate"><span class="nav-number">19.2.</span> <span class="nav-text">AndPredicate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AnyPredicate"><span class="nav-number">19.3.</span> <span class="nav-text">AnyPredicate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ComparatorPredicate"><span class="nav-number">19.4.</span> <span class="nav-text">ComparatorPredicate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TransformerUtils"><span class="nav-number">20.</span> <span class="nav-text">TransformerUtils</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ChainedTransformer"><span class="nav-number">20.1.</span> <span class="nav-text">ChainedTransformer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CloneTransformer"><span class="nav-number">20.2.</span> <span class="nav-text">CloneTransformer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ClosureTransformer"><span class="nav-number">20.3.</span> <span class="nav-text">ClosureTransformer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IfTransformer"><span class="nav-number">20.4.</span> <span class="nav-text">IfTransformer</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="a6one"
+      src="/images/header.png">
+  <p class="site-author-name" itemprop="name">a6one</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a6one" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a6one" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1245007716@qq.com" title="E-Mail → mailto:1245007716@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/a6one" title="https:&#x2F;&#x2F;github.com&#x2F;a6one" rel="noopener" target="_blank">a6one</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a6one@tj</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">64k</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"63gAbkTkHVF9Ms1zlIYbJKX3-gzGzoHsz","app_key":"aXAAepLkG1fMcFSVGByK8QeO","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '63gAbkTkHVF9Ms1zlIYbJKX3-gzGzoHsz',
+      appKey     : 'aXAAepLkG1fMcFSVGByK8QeO',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
