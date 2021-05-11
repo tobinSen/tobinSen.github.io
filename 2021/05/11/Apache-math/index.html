@@ -22,16 +22,22 @@
     var CONFIG = {"hostname":"a6one.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="动人の橘子">
-<meta property="og:url" content="http://a6one.github.io/archives/2021/05/index.html">
+  <meta name="description" content="简介：apache-common-math是用来操作数字方面的工具类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Apache-math">
+<meta property="og:url" content="http://a6one.github.io/2021/05/11/Apache-math/index.html">
 <meta property="og:site_name" content="动人の橘子">
+<meta property="og:description" content="简介：apache-common-math是用来操作数字方面的工具类">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://a6one.github.io/2021/05/11/Apache-math/Apache-math.png">
+<meta property="article:published_time" content="2021-05-11T05:52:34.000Z">
+<meta property="article:modified_time" content="2021-05-11T05:00:00.000Z">
 <meta property="article:author" content="a6one">
-<meta property="article:tag" content="java,Spring,SpringBoot">
+<meta property="article:tag" content="apache-common-math">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://a6one.github.io/2021/05/11/Apache-math/Apache-math.png">
 
-<link rel="canonical" href="http://a6one.github.io/archives/2021/05/">
+<link rel="canonical" href="http://a6one.github.io/2021/05/11/Apache-math/">
 
 
 <script id="page-configurations">
@@ -39,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | 动人の橘子</title>
+  <title>Apache-math | 动人の橘子</title>
   
 
 
@@ -183,196 +189,145 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/05/11/Apache-math/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.png">
+      <meta itemprop="name" content="a6one">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="动人の橘子">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Apache-math
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-11 13:52:34 / 修改时间：13:00:00" itemprop="dateCreated datePublished" datetime="2021-05-11T13:52:34+08:00">2021-05-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/apache-common/" itemprop="url" rel="index"><span itemprop="name">apache-common</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/05/11/Apache-math/" class="post-meta-item leancloud_visitors" data-flag-title="Apache-math" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
   
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 8 篇日志。 继续努力。</span>
-      </div>
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/05/11/Apache-math/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/11/Apache-math/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>951</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <p>简介：apache-common-math是用来操作数字方面的工具类</p>
+<img src="/2021/05/11/Apache-math/Apache-math.png" style="zoom: 50%;">
+
+<a id="more"></a>
+
+<h3 id="ArithmeticUtils"><a href="#ArithmeticUtils" class="headerlink" title="ArithmeticUtils"></a>ArithmeticUtils</h3><p>用于算术的运算</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.math3.util.ArithmeticUtils#addAndCheck(int, int)       // 检查并做加法</span><br><span class="line">org.apache.commons.math3.util.ArithmeticUtils#addAndCheck(long, long)     // 检查并做加法</span><br><span class="line">org.apache.commons.math3.util.ArithmeticUtils#gcd(int, int)               // 求两个数的最大公约数</span><br><span class="line">org.apache.commons.math3.util.ArithmeticUtils#lcm(int, int)               // 求两个数的最小公倍数</span><br><span class="line">org.apache.commons.math3.util.ArithmeticUtils#mulAndCheck(int, int)       // 两数向乘</span><br><span class="line">org.apache.commons.math3.util.ArithmeticUtils#subAndCheck(int, int)       // 两数向减</span><br><span class="line">org.apache.commons.math3.util.ArithmeticUtils#pow(int, int)               // 计算次幂</span><br><span class="line">org.apache.commons.math3.util.ArithmeticUtils#isPowerOfTwo(long)          // 是否是2的次幂</span><br></pre></td></tr></table></figure>
+
+<h3 id="BigReal"><a href="#BigReal" class="headerlink" title="BigReal"></a>BigReal</h3><p>用于操作BigDecimal的工具</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.math3.util.BigReal#BigReal(java.math.BigDecimal)     // 构建bigReal</span><br><span class="line">org.apache.commons.math3.util.BigReal#add(BigReal)                      // 相加</span><br></pre></td></tr></table></figure>
+
+<h3 id="MathUtils"><a href="#MathUtils" class="headerlink" title="MathUtils"></a>MathUtils</h3><p>用于操作数字</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">org.apache.commons.math3.util.MathUtils#hash(double)          // 计算hash值</span><br><span class="line">org.apache.commons.math3.util.MathUtils#max(int,int)          // 比较最大值</span><br></pre></td></tr></table></figure>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-11T13:52:34+08:00"
-              content="2021-05-11">
-          05-11
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/apache-common-math/" rel="tag"># apache-common-math</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/11/Apache-codec/" itemprop="url">
-            <span itemprop="name">Apache-codec</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-11T13:52:34+08:00"
-              content="2021-05-11">
-          05-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/11/Apache-io/" itemprop="url">
-            <span itemprop="name">Apache-io</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-11T13:52:34+08:00"
-              content="2021-05-11">
-          05-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/11/Apache-math/" itemprop="url">
-            <span itemprop="name">Apache-math</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-11T11:52:34+08:00"
-              content="2021-05-11">
-          05-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/11/Apache-Collections/" itemprop="url">
-            <span itemprop="name">Apache-Collections</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-06T01:23:00+08:00"
-              content="2021-05-06">
-          05-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/06/idea-debug/" itemprop="url">
-            <span itemprop="name">idea多线程调试</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-05T20:23:00+08:00"
-              content="2021-05-05">
-          05-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/05/joda-time/" itemprop="url">
-            <span itemprop="name">joda-time</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-04T11:52:34+08:00"
-              content="2021-05-04">
-          05-04
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/04/Apache-lang/" itemprop="url">
-            <span itemprop="name">Apache-lang</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-02T11:52:34+08:00"
-              content="2021-05-02">
-          05-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/02/Apache-BeanUtils/" itemprop="url">
-            <span itemprop="name">Apache-BeanUtils</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+        
 
 
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/11/Apache-Collections/" rel="prev" title="Apache-Collections">
+      <i class="fa fa-chevron-left"></i> Apache-Collections
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/11/Apache-io/" rel="next" title="Apache-io">
+      Apache-io <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-  </div>
+      </footer>
+    
+  </article>
   
   
-  
-
   
 
 
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -419,6 +374,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArithmeticUtils"><span class="nav-number">1.</span> <span class="nav-text">ArithmeticUtils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BigReal"><span class="nav-number">2.</span> <span class="nav-text">BigReal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathUtils"><span class="nav-number">3.</span> <span class="nav-text">MathUtils</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
