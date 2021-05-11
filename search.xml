@@ -388,10 +388,10 @@
       </tags>
   </entry>
   <entry>
-    <title>Apache-Collections</title>
-    <url>/2021/05/11/Apache-Collections/</url>
+    <title>Apache-collections</title>
+    <url>/2021/05/11/Apache-collections/</url>
     <content><![CDATA[<p>简介：Apache-common Collections提供了很多的基于集合间的操作</p>
-<img src="/2021/05/11/Apache-Collections/Apache-Collections.png" style="zoom: 50%;">
+<img src="/2021/05/11/Apache-collections/Apache-collections.png" style="zoom: 50%;">
 
 <a id="more"></a>
 
@@ -608,7 +608,7 @@
         <category>apache-common</category>
       </categories>
       <tags>
-        <tag>apache-common-Collections</tag>
+        <tag>apache-common-collections</tag>
       </tags>
   </entry>
 </search>
