@@ -611,4 +611,202 @@
         <tag>apache-common-collections</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Guava-base</title>
+    <url>/2021/05/13/common-base/</url>
+    <content><![CDATA[<p>简介：Guava-base是base包下常用的工具</p>
+<img src="/2021/05/13/common-base/common-base.png" style="zoom: 50%;">
+
+<a id="more"></a>
+
+<h3 id="CaseFormat"><a href="#CaseFormat" class="headerlink" title="CaseFormat"></a>CaseFormat</h3><p>用于大写转换</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">assertEquals(<span class="string">&quot;FooBar&quot;</span>, LOWER_HYPHEN.to(UPPER_CAMEL, <span class="string">&quot;foo-bar&quot;</span>));      <span class="comment">// 转换为小写并且字母间用-隔开</span></span><br><span class="line">assertEquals(<span class="string">&quot;FooBar&quot;</span>, LOWER_UNDERSCORE.to(UPPER_CAMEL, <span class="string">&quot;foo_bar&quot;</span>));  <span class="comment">// 转换为小写并且字母间用_隔开</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="CharMatcher"><a href="#CharMatcher" class="headerlink" title="CharMatcher"></a>CharMatcher</h3><p>字符匹配器</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">CharMatcher.DIGIT.retainFrom(str);                    <span class="comment">// 保留数字</span></span><br><span class="line">CharMatcher.JAVA_LETTER.retainFrom(str);              <span class="comment">// 保留字母</span></span><br><span class="line">CharMatcher.JAVA_LETTER_OR_DIGIT.retainFrom(str);     <span class="comment">// 保留数字和字母</span></span><br><span class="line">CharMatcher.whitespace().collapseFrom(tmpStr,<span class="string">&#x27;-&#x27;</span>)     <span class="comment">// 删除空白用-替换</span></span><br><span class="line">CharMatcher.inRange(<span class="string">&#x27;0&#x27;</span>,<span class="string">&#x27;6&#x27;</span>).retainFrom(tmpStr)       <span class="comment">// 获取指定范围内的字符</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Charsets"><a href="#Charsets" class="headerlink" title="Charsets"></a>Charsets</h3><p>字符集</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Charset UTF_8 = Charset.forName(<span class="string">&quot;UTF-8&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Joiner"><a href="#Joiner" class="headerlink" title="Joiner"></a>Joiner</h3><p>用于字符串拼接</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.Joiner#on(java.lang.String)       // 基于分隔符构建Joiner</span><br><span class="line">com.google.common.base.Joiner#appendTo(A, java.lang.Iterable&lt;?&gt;)    // 拼接集合元素</span><br><span class="line">com.google.common.base.Joiner#join(java.lang.Iterable&lt;?&gt;) // 集合拼接</span><br><span class="line">com.google.common.base.Joiner#skipNulls(Iterable)         // 跳过为null</span><br><span class="line">com.google.common.base.Joiner#withKeyValueSeparator(char) // 用于拼接map</span><br></pre></td></tr></table></figure>
+
+<h3 id="MoreObjects"><a href="#MoreObjects" class="headerlink" title="MoreObjects"></a>MoreObjects</h3><p>用于对象操作</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.MoreObjects#firstNonNull(Obj,Obj)       // 返回第一个不为null的值</span><br></pre></td></tr></table></figure>
+
+<h3 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h3><p>对象操作</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.Objects#equal(T,T)        // 判断两个对象是否相等</span><br></pre></td></tr></table></figure>
+
+<h3 id="Optional"><a href="#Optional" class="headerlink" title="Optional"></a>Optional</h3><p>用于null的操作</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.Optional#absent()         // 返回一个空的optional对象</span><br><span class="line">com.google.common.base.Optional#fromNullable(T)  // 构建optional对象</span><br><span class="line">com.google.common.base.Optional#fromJavaUtil(Optional) // 将java中的optional转换为guava包中</span><br><span class="line">com.google.common.base.Optional#toJavaUtil(com.google.common.base.Optional&lt;T&gt;) // 将guava包中的optional转换为java包optional</span><br><span class="line">com.google.common.base.Optional#isPresent()     // 是否为空</span><br><span class="line">com.google.common.base.Optional#get()           // 获取值</span><br><span class="line">com.google.common.base.Optional#or(T)           // 为空就返回默认值，否则返回原值</span><br><span class="line">com.google.common.base.Optional#or(com.google.common.base.Supplier&lt;? extends T&gt;) // 为空就执行supplier</span><br><span class="line">com.google.common.base.Optional#orNull()        // 为空就返回null</span><br><span class="line">com.google.common.base.Optional#asSet()         // 将值作为集合返回</span><br><span class="line">com.google.common.base.Optional#transform()     // 不为空就进行转换</span><br></pre></td></tr></table></figure>
+
+<h3 id="Preconditions"><a href="#Preconditions" class="headerlink" title="Preconditions"></a>Preconditions</h3><p>断言类</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.Preconditions#checkArgument(boolean)     // 断言判断</span><br><span class="line">com.google.common.base.Preconditions#checkState(boolean)        // 状态判断</span><br><span class="line">com.google.common.base.Preconditions#checkNotNull(T)            // 值判断</span><br></pre></td></tr></table></figure>
+
+<h3 id="Predicates"><a href="#Predicates" class="headerlink" title="Predicates"></a>Predicates</h3><p>断言类</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.Predicates#isNull()      // 是否是空</span><br><span class="line">com.google.common.base.Predicates#not()         // 不为空</span><br><span class="line">com.google.common.base.Predicates#and(java.lang.Iterable&lt;? extends com.google.common.base.Predicate&lt;? super T&gt;&gt;) // 多个断言的判断</span><br><span class="line">com.google.common.base.Predicates#or(java.lang.Iterable&lt;? extends com.google.common.base.Predicate&lt;? super T&gt;&gt;)  // 多个断言或的判断</span><br><span class="line">com.google.common.base.Predicates#equalTo(T)    // 基于equal的判断</span><br><span class="line">com.google.common.base.Predicates#instanceOf(T) // 基于instance实例的判断</span><br><span class="line">com.google.common.base.Predicates#subtypeOf(T)  // 基于子类的判断</span><br><span class="line">com.google.common.base.Predicates#in(Collection) // 是否是属于collection中判断</span><br><span class="line">com.google.common.base.Predicates#compose(P,F)   // 先funtion在predicate判断</span><br><span class="line">com.google.common.base.Predicates#containsPattern() // 正则匹配</span><br></pre></td></tr></table></figure>
+
+<h3 id="Splitter"><a href="#Splitter" class="headerlink" title="Splitter"></a>Splitter</h3><p>字符串拆分</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.Splitter#on(char)         // 根据什么进行拆分</span><br><span class="line">com.google.common.base.Splitter#fixedLength(int) // 基于固定长度拆分</span><br><span class="line">com.google.common.base.Splitter#omitEmptyStrings() // 拆分时候忽略空的字符串</span><br><span class="line">com.google.common.base.Splitter#limit(int)       // 只拆分几项</span><br><span class="line">com.google.common.base.Splitter#trimResults()    // 拆分的时候去掉空白</span><br><span class="line">com.google.common.base.Splitter#split(String)    // 拆分字符串</span><br><span class="line">com.google.common.base.Splitter#splitToList()    // 拆分后转换为一个集合</span><br><span class="line">com.google.common.base.Splitter#splitToStream()  // 拆分后转换为stream</span><br><span class="line">  </span><br><span class="line">com.google.common.base.Splitter#withKeyValueSeparator(java.lang.String)  // 拆分map</span><br></pre></td></tr></table></figure>
+
+<h3 id="Strings"><a href="#Strings" class="headerlink" title="Strings"></a>Strings</h3><p>字符串操作</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.Strings#nullToEmpty(String)       // 将null转换未空串</span><br><span class="line">com.google.common.base.Strings#emptyToNull(String)       // 将空串转换为null</span><br><span class="line">com.google.common.base.Strings#isNullOrEmpty(String)     // 判断是空或者是null</span><br><span class="line"></span><br><span class="line">com.google.common.base.Strings#padStart(String,int,char) // 填充字符从最侧开始</span><br><span class="line">com.google.common.base.Strings#padEnd(String,int,char)   // 向右侧进行填充</span><br><span class="line">com.google.common.base.Strings#repeat(String,int)        // 重复出现</span><br><span class="line"></span><br><span class="line">com.google.common.base.Strings#commonPrefix(String,String) // 是公共的前缀</span><br><span class="line">com.google.common.base.Strings#commonSuffix(String,String) // 是公共的后缀</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Suppliers"><a href="#Suppliers" class="headerlink" title="Suppliers"></a>Suppliers</h3><p>操作Suppliers类</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.base.Suppliers#compose(Function,Supplier)     // 将funtion和supplier进行结合</span><br><span class="line">com.google.common.base.Suppliers#ofInstance()                   // 是否是该类的实例</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Guava</category>
+      </categories>
+      <tags>
+        <tag>Guava-common-base</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Guava-cache</title>
+    <url>/2021/05/13/common-cache/</url>
+    <content><![CDATA[<p>简介：用于操作缓存的类</p>
+<img src="/2021/05/13/common-cache/common-cache.png" style="zoom: 50%;">
+
+<a id="more"></a>
+
+<h3 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h3><p>用于操作缓存的数据</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line">LoadingCache&lt;Key, Graph&gt; graphs = CacheBuilder.newBuilder()</span><br><span class="line">        .maximumSize(<span class="number">1000</span>)</span><br><span class="line">        .expireAfterWrite(<span class="number">10</span>, TimeUnit.MINUTES)</span><br><span class="line">        .removalListener(MY_LISTENER)</span><br><span class="line">        .build(</span><br><span class="line">            <span class="keyword">new</span> CacheLoader&lt;Key, Graph&gt;() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> Graph <span class="title">load</span><span class="params">(Key key)</span> <span class="keyword">throws</span> AnyException </span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> createExpensiveGraph(key);</span><br><span class="line">                &#125;</span><br><span class="line">     &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建方法</span></span><br><span class="line">com.google.common.cache.Cache#getIfPresent(Obj)        // 根据key返回值</span><br><span class="line">com.google.common.cache.Cache#get(Obj,Callable)        // 根据key返回值，如果不存在值就调用callable然后存储在cache中</span><br><span class="line">com.google.common.cache.Cache#getAllPresent(Iterable)  // 根据keys返回所有的值</span><br><span class="line">com.google.common.cache.Cache#put(K,V)                 // 添加</span><br><span class="line">com.google.common.cache.Cache#invalidate(K)            // 清理key</span><br><span class="line">com.google.common.cache.Cache#stats()                  // 获取这个cache的统计信息</span><br><span class="line">com.google.common.cache.Cache#asMap()                  // cache转换一个map</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Guava</category>
+      </categories>
+      <tags>
+        <tag>Guava-common-cache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Guava-io</title>
+    <url>/2021/05/13/common-io/</url>
+    <content><![CDATA[<p>简介：用于操作IO流</p>
+<img src="/2021/05/13/common-io/common-io.png" style="zoom: 50%;">
+
+<a id="more"></a>
+
+<h3 id="ByteStreams"><a href="#ByteStreams" class="headerlink" title="ByteStreams"></a>ByteStreams</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.io.ByteStreams#copy(java.io.InputStream, java.io.OutputStream)   // 流复制</span><br></pre></td></tr></table></figure>
+
+<h3 id="CharStreams"><a href="#CharStreams" class="headerlink" title="CharStreams"></a>CharStreams</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.io.CharStreams#copy()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Closeables"><a href="#Closeables" class="headerlink" title="Closeables"></a>Closeables</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法 </span></span><br><span class="line">com.google.common.io.Closeables#closeQuietly(java.io.InputStream)  // 安静关闭流</span><br></pre></td></tr></table></figure>
+
+<h3 id="Closer"><a href="#Closer" class="headerlink" title="Closer"></a>Closer</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.io.Closer#create()   // 创建</span><br><span class="line">com.google.common.io.Closer#register() // 注册</span><br><span class="line">com.google.common.io.Closer#close()    // 关闭</span><br></pre></td></tr></table></figure>
+
+<h3 id="Files"><a href="#Files" class="headerlink" title="Files"></a>Files</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.io.Files#newReader()</span><br><span class="line">com.google.common.io.Files#toByteArray()      // 转换为字节</span><br></pre></td></tr></table></figure>
+
+<h3 id="MoreFiles"><a href="#MoreFiles" class="headerlink" title="MoreFiles"></a>MoreFiles</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.io.MoreFiles#asByteSource() </span><br></pre></td></tr></table></figure>
+
+<h3 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.io.Resources#copy()</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Guava</category>
+      </categories>
+      <tags>
+        <tag>Guava-common-io</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Guava-collections</title>
+    <url>/2021/05/13/common-collections/</url>
+    <content><![CDATA[<p>简介：用于操作集合</p>
+<img src="/2021/05/13/common-collections/common-collections.png" style="zoom: 50%;">
+
+<a id="more"></a>
+
+<h2 id="BiMap"><a href="#BiMap" class="headerlink" title="BiMap"></a>BiMap</h2><p>通过key找value，也可以使用value找key。其实现类:</p>
+<p><code>ImmutableBiMap</code> 、<code>SingletonImmutableBiMap</code>  、<code>RegularImmutableBiMap</code> 、<code>RegularImmutableBiMap</code> 、<code>JdkBackedImmutableBiMap</code> </p>
+<p><code>HashBiMap</code> </p>
+<p><code>AbstractBiMap</code> 、<code>EnumHashBiMap</code> 、<code>EnumBiMap</code> </p>
+<h3 id="ImmutableBiMap"><a href="#ImmutableBiMap" class="headerlink" title="ImmutableBiMap"></a>ImmutableBiMap</h3><p>用于操作不可变类的BiMap</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ImmutableBiMap#of(K, V)         // 插入k,v</span><br><span class="line">com.google.common.collect.ImmutableBiMap#of(K, V, K, V)   // 插入多个kv</span><br><span class="line">com.google.common.collect.ImmutableBiMap#copyOf(java.util.Map&lt;? extends K,? extends V&gt;) // 将一个map转换为Immutable类型</span><br><span class="line">com.google.common.collect.ImmutableBiMap#values()         // 获取所有value的值</span><br></pre></td></tr></table></figure>
+
+<h3 id="SingletonImmutableBiMap"><a href="#SingletonImmutableBiMap" class="headerlink" title="SingletonImmutableBiMap"></a>SingletonImmutableBiMap</h3><p>只能存储单个key-value值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K, V&gt; <span class="function">ImmutableBiMap&lt;K, V&gt; <span class="title">of</span><span class="params">(K k1, V v1)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SingletonImmutableBiMap&lt;&gt;(k1, v1);          <span class="comment">// 只能通过这个方法进行创建</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="RegularImmutableBiMap"><a href="#RegularImmutableBiMap" class="headerlink" title="RegularImmutableBiMap"></a>RegularImmutableBiMap</h3><p>常规的ImmutableBiMap的创建</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K, V&gt; <span class="function">ImmutableBiMap&lt;K, V&gt; <span class="title">of</span><span class="params">(K k1, V v1, K k2, V v2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> RegularImmutableBiMap.fromEntries(entryOf(k1, v1), entryOf(k2, v2));    <span class="comment">// 只能通过这个方法进行创建</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="HashBiMap"><a href="#HashBiMap" class="headerlink" title="HashBiMap"></a>HashBiMap</h3><p>基于hashMap的实现</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.HashBiMap#create()        // 创建一个HashBiMap对象</span><br><span class="line">com.google.common.collect.HashBiMap#containsKey(K)  // 是否包含key</span><br><span class="line">com.google.common.collect.HashBiMap#containsValue(V) // 是否包含value</span><br><span class="line">com.google.common.collect.HashBiMap#get(K)          // 通过key获取value</span><br><span class="line">com.google.common.collect.HashBiMap#put(K, V)       // 插入值</span><br><span class="line">com.google.common.collect.HashBiMap#forcePut(K,V)   // 强制性插入</span><br><span class="line">com.google.common.collect.HashBiMap#putInverse(V,K) // 逆序插入，先插入value,在插入key</span><br><span class="line">com.google.common.collect.HashBiMap#remove(K)       // 删除Key</span><br><span class="line">com.google.common.collect.HashBiMap#inverse()       // 逆序显示</span><br></pre></td></tr></table></figure>
+
+<h3 id="AbstractBiMap"><a href="#AbstractBiMap" class="headerlink" title="AbstractBiMap"></a>AbstractBiMap</h3><h3 id="EnumHashBiMap"><a href="#EnumHashBiMap" class="headerlink" title="EnumHashBiMap"></a>EnumHashBiMap</h3><p>用于操作枚举的BiMap</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.EnumHashBiMap#create(java.lang.Class&lt;K&gt;)      // 基于枚举Key来创建</span><br><span class="line">com.google.common.collect.EnumHashBiMap#put(K,V)                        // 插入</span><br><span class="line">com.google.common.collect.EnumHashBiMap#forcePut(K,V)                   // 强制插入</span><br></pre></td></tr></table></figure>
+
+<h3 id="EnumBiMap"><a href="#EnumBiMap" class="headerlink" title="EnumBiMap"></a>EnumBiMap</h3><p>用于操作枚举</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.EnumBiMap#create(java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;)   // 基于枚举Key来创建</span><br><span class="line">com.google.common.collect.EnumBiMap#keyType()          // key类型</span><br><span class="line">com.google.common.collect.EnumBiMap#valueType()        // value类型</span><br></pre></td></tr></table></figure>
+
+<h2 id="Multimap"><a href="#Multimap" class="headerlink" title="Multimap"></a>Multimap</h2><p>用操作多key的情况，其实现类。本质上就是List&lt;Key,Collection<Value>&gt; 类型存储</Value></p>
+<p><code>ForwardingMultimap</code> 、<code>ForwardingListMultimap</code> 、<code>ForwardingSetMultimap</code> 、<code>ForwardingSortedSetMultimap</code></p>
+<p><code>ListMultimap</code> 、<code>LinkedListMultimap</code> 、<code>AbstractListMultimap</code> 、<code>ArrayListMultimap</code> 、<code>FilteredKeyListMultimap</code>、<code>ForwardingListMultimap</code> 、<code>ImmutableListMultimap</code> </p>
+<p><code>AbstractMultimap</code> 、<code>LinkedListMultimap</code>、<code>AbstractMapBasedMultimap</code> 、<code>LinkedHashMultimap</code> 、<code>HashMultimap</code> 、<code>TreeMultimap</code>、<code>FilteredEntrySetMultimap</code> 、<code>ImmutableMultimap</code> 、<code>FilteredKeyListMultimap</code> 、<code>FilteredKeySetMultimap</code> 、</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Multimap#containsKey()      // 包含key</span><br><span class="line">com.google.common.collect.Multimap#containsValue()    // 包含value</span><br><span class="line">com.google.common.collect.Multimap#put(K,V)           // 新增</span><br><span class="line">com.google.common.collect.Multimap#replaceValues()    // 替换</span><br><span class="line">com.google.common.collect.Multimap#get(K)             // 获取</span><br><span class="line">com.google.common.collect.Multimap#forEach()          // 遍历</span><br><span class="line">com.google.common.collect.Multimap#asMap()            // 视图</span><br></pre></td></tr></table></figure>
+
+<h3 id="Multimaps"><a href="#Multimaps" class="headerlink" title="Multimaps"></a>Multimaps</h3><p>用于操作Multimap的工具</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Multimaps#toMultimap(Function,Function,Supplier)      // 创建一个Mulimap</span><br><span class="line"><span class="comment">// stream + mulitmap 的操作 </span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> ListMultimap&lt;Character, String&gt; FIRST_LETTER_MULTIMAP =</span><br><span class="line">   Stream.of(<span class="string">&quot;banana&quot;</span>, <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;carrot&quot;</span>, <span class="string">&quot;asparagus&quot;</span>, <span class="string">&quot;cherry&quot;</span>)</span><br><span class="line">            .collect(</span><br><span class="line">                toMultimap(</span><br><span class="line">                     str -&gt; str.charAt(<span class="number">0</span>),</span><br><span class="line">                     str -&gt; str.substring(<span class="number">1</span>),</span><br><span class="line">                     MultimapBuilder.treeKeys().arrayListValues()::build));</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Multimaps#flatteningToMultimap()                // 并行创建</span><br><span class="line">com.google.common.collect.Multimaps#newListMultimap(Map,Supplier)         // 创建MultiListMap</span><br><span class="line">com.google.common.collect.Multimaps#newSetMultimap(Map,Supplier)          // 创建MultiSetMap</span><br><span class="line">com.google.common.collect.Multimaps#newSortedSetMultimap(Map,Supplier)    // 创建MulitSortSetMap</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Multimaps#invertFrom(src,dest)                  // 将值进行转换后返回</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Multimaps#synchronizedMultimap()        </span><br><span class="line">com.google.common.collect.Multimaps#unmodifiableMultimap(com.google.common.collect.Multimap&lt;K,V&gt;) </span><br><span class="line">com.google.common.collect.Multimaps#asMap(com.google.common.collect.ListMultimap&lt;K,V&gt;)     // 返回视图</span><br><span class="line">com.google.common.collect.Multimaps#forMap(Map)                           // 将map转换为MulitiMap</span><br><span class="line">com.google.common.collect.Multimaps#transformValues(com.google.common.collect.ListMultimap&lt;K,V1&gt;, com.google.common.base.Function&lt;? super V1,V2&gt;)   // 对value进行转换</span><br><span class="line">com.google.common.collect.Multimaps#transformEntries(com.google.common.collect.Multimap&lt;K,V1&gt;, com.google.common.collect.Maps.EntryTransformer&lt;? super K,? super V1,V2&gt;) // 对key value进行转换</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Multimaps#filterKeys(com.google.common.collect.ListMultimap&lt;K,V&gt;, com.google.common.base.Predicate&lt;? super K&gt;) // 过滤key</span><br><span class="line">com.google.common.collect.Multimaps#filterValues(com.google.common.collect.SetMultimap&lt;K,V&gt;, com.google.common.base.Predicate&lt;? super V&gt;) // 过滤value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="MultimapBuilder"><a href="#MultimapBuilder" class="headerlink" title="MultimapBuilder"></a>MultimapBuilder</h3><p>用于构建MuliMap</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.MultimapBuilder#hashKeys()       // 预定义key的数据类型为hash</span><br><span class="line">com.google.common.collect.MultimapBuilder#linkedHashKeys() // 预定义key的数据类型为LinkedHash</span><br><span class="line">com.google.common.collect.MultimapBuilder#treeKeys()       // 预定义key的数据类型为tree</span><br><span class="line">com.google.common.collect.MultimapBuilder#enumKeys()       // 定义枚举key</span><br><span class="line"></span><br><span class="line">com.google.common.collect.MultimapBuilder.MultimapBuilderWithKeys#arrayListValues() // 定义value的类型</span><br><span class="line">com.google.common.collect.MultimapBuilder.MultimapBuilderWithKeys#linkedListValues()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Multiset"><a href="#Multiset" class="headerlink" title="Multiset"></a>Multiset</h2><p>用于多个key存储在set集合中，其中实现类有</p>
+<p><code>SortedMultiset</code> 、<code>TreeMultiset</code> 、<code>ImmutableMultiset</code> 、<code>ConcurrentHashMultiset</code> 、<code>HashMultiset</code> 、<code>LinkedHashMultiset</code></p>
+<p> <code>EnumMultiset</code></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Multiset#count(E)           // 统计元素在Set中的个数</span><br><span class="line">com.google.common.collect.Multiset#add(E, int)        // 添加几个元素</span><br><span class="line">com.google.common.collect.Multiset#remove(java.lang.Object) // 删除</span><br><span class="line">com.google.common.collect.Multiset#setCount(E, int)   // 新增或删除这个元素在set中的次数</span><br><span class="line">com.google.common.collect.Multiset#elementSet()       // 获取所有元素去重了的</span><br><span class="line">com.google.common.collect.Multiset#entrySet()         // 所有元素</span><br><span class="line">com.google.common.collect.Multiset#forEachEntry()     // 遍历</span><br></pre></td></tr></table></figure>
+
+<h3 id="Multisets"><a href="#Multisets" class="headerlink" title="Multisets"></a>Multisets</h3><p>用于构建MuliSet</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Multisets#toMultiset()       // 创建MultiSet对象</span><br><span class="line">com.google.common.collect.Multisets#unmodifiableMultiset(com.google.common.collect.Multiset&lt;? extends E&gt;) // 不可变</span><br><span class="line">com.google.common.collect.Multisets#filter()           // set中元素进行过滤</span><br><span class="line">com.google.common.collect.Multisets#union()            // 合并</span><br><span class="line">com.google.common.collect.Multisets#intersection()     // 交接</span><br><span class="line">com.google.common.collect.Multisets#difference()       // 不同点</span><br><span class="line">com.google.common.collect.Multisets#removeOccurrences(com.google.common.collect.Multiset&lt;?&gt;, java.lang.Iterable&lt;?&gt;) // 移除</span><br></pre></td></tr></table></figure>
+
+<h2 id="Range-amp-Cut-amp-ContiguousSet"><a href="#Range-amp-Cut-amp-ContiguousSet" class="headerlink" title="Range &amp; Cut &amp; ContiguousSet"></a>Range &amp; Cut &amp; ContiguousSet</h2><p>操作范围</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Range#create(Cut,Cut)      // 创建</span><br><span class="line">com.google.common.collect.Range#open()               // 创建</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Cut#aboveValue()           // 以上的值</span><br><span class="line">com.google.common.collect.Cut#belowValue()           // 以下的值</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Cut#belowAll()</span><br><span class="line">com.google.common.collect.Cut#aboveAll()</span><br><span class="line"></span><br><span class="line">ContiguousSet.create(Range.closed(<span class="number">5</span>, <span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="RangeMap"><a href="#RangeMap" class="headerlink" title="RangeMap"></a>RangeMap</h2><p>用于范围map存储，其实现类：<code>ImmutableRangeMap</code> 、<code>TreeRangeMap</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.RangeMap#get(K)           // 通过key获取</span><br><span class="line">com.google.common.collect.RangeMap#getEntry()       // key的范围</span><br><span class="line">com.google.common.collect.RangeMap#span()           // 返回最小的范围</span><br><span class="line">com.google.common.collect.RangeMap#put(Range,V)     // 新增</span><br><span class="line">com.google.common.collect.RangeMap#putCoalescing()  // 具有相同值的进行范围合并</span><br><span class="line"></span><br><span class="line">com.google.common.collect.RangeMap#merge()          // range拆分</span><br><span class="line">rangeMap.put(Range.closedOpen(<span class="number">0</span>, <span class="number">3</span>), <span class="number">1</span>);</span><br><span class="line">rangeMap.merge(Range.closedOpen(<span class="number">1</span>, <span class="number">2</span>), <span class="number">2</span>, Integer::sum);</span><br></pre></td></tr></table></figure>
+
+<h3 id="ImmutableRangeMap"><a href="#ImmutableRangeMap" class="headerlink" title="ImmutableRangeMap"></a>ImmutableRangeMap</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ImmutableRangeMap#of() </span><br></pre></td></tr></table></figure>
+
+<h3 id="TreeRangeMap"><a href="#TreeRangeMap" class="headerlink" title="TreeRangeMap"></a>TreeRangeMap</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.TreeRangeMap#create()      // 创建TreeRangeMap</span><br></pre></td></tr></table></figure>
+
+<h2 id="RangeSet"><a href="#RangeSet" class="headerlink" title="RangeSet"></a>RangeSet</h2><p>用于存储范围，其实现类：<code>ImmutableRangeSet</code> 、 <code>TreeRangeSet</code> </p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.RangeSet#add(Range)        // 新增</span><br><span class="line">com.google.common.collect.RangeSet#contains()        // 判断值是否存在</span><br><span class="line">com.google.common.collect.RangeSet#rangeContaining() // 返回包含这个值的Range</span><br><span class="line">com.google.common.collect.RangeSet#intersects()      // 交叉</span><br><span class="line">com.google.common.collect.RangeSet#encloses()        // 范围包含</span><br></pre></td></tr></table></figure>
+
+<h3 id="ImmutableRangeSet"><a href="#ImmutableRangeSet" class="headerlink" title="ImmutableRangeSet"></a>ImmutableRangeSet</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ImmutableRangeSet#toImmutableRangeSet()</span><br></pre></td></tr></table></figure>
+
+<h3 id="TreeRangeSet"><a href="#TreeRangeSet" class="headerlink" title="TreeRangeSet"></a>TreeRangeSet</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.TreeRangeSet#create()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Table"><a href="#Table" class="headerlink" title="Table"></a>Table</h2><p>用于操作表格，实现类：<code>ArrayTable</code> 、<code>HashBasedTable</code> 、<code>ImmutableTable</code> 、<code>TreeBasedTable</code></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Table#contains(R,C)        // 包含对应的行，列</span><br><span class="line">com.google.common.collect.Table#get(R,C)             // cell</span><br><span class="line">com.google.common.collect.Table#put(R,C,V)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tables"><a href="#Tables" class="headerlink" title="Tables"></a>Tables</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">com.google.common.collect.Tables#toTable(java.util.function.Function&lt;? super T,? extends R&gt;, java.util.function.Function&lt;? super T,? extends C&gt;, java.util.function.Function&lt;? super T,? extends V&gt;, java.util.function.Supplier&lt;I&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="ArrayTable"><a href="#ArrayTable" class="headerlink" title="ArrayTable"></a>ArrayTable</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ArrayTable#create(java.lang.Iterable&lt;? extends R&gt;, java.lang.Iterable&lt;? extends C&gt;) </span><br></pre></td></tr></table></figure>
+
+<h3 id="HashBasedTable"><a href="#HashBasedTable" class="headerlink" title="HashBasedTable"></a>HashBasedTable</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.HashBasedTable#create()</span><br></pre></td></tr></table></figure>
+
+<h3 id="TreeBasedTable"><a href="#TreeBasedTable" class="headerlink" title="TreeBasedTable"></a>TreeBasedTable</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.TreeBasedTable#create()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Ordering"><a href="#Ordering" class="headerlink" title="Ordering"></a>Ordering</h2><p>用于排序</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Ordering#natural()     // 自然排序</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Comparators"><a href="#Comparators" class="headerlink" title="Comparators"></a>Comparators</h2><p>用于排序</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Comparators#least() // 相对于指定key最小的值</span><br><span class="line"><span class="comment">// stream + comparators 运作</span></span><br><span class="line">Stream.of(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;quux&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;elephant&quot;</span>)</span><br><span class="line">       .collect(least(<span class="number">2</span>, comparingInt(String::length)))</span><br><span class="line">   <span class="comment">// returns &#123;&quot;foo&quot;, &quot;quux&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ComparisonChain"><a href="#ComparisonChain" class="headerlink" title="ComparisonChain"></a>ComparisonChain</h2><p>过滤器链</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ComparisonChain#start() </span><br><span class="line">com.google.common.collect.ComparisonChain#compare(int, int) // 比较</span><br></pre></td></tr></table></figure>
+
+<h2 id="FluentIterable"><a href="#FluentIterable" class="headerlink" title="FluentIterable"></a>FluentIterable</h2><p>迭代器</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">ImmutableList&lt;String&gt; results =</span><br><span class="line">      FluentIterable.from(database.getClientList())</span><br><span class="line">          .filter(Client::isActiveInLastMonth)</span><br><span class="line">          .transform(Object::toString)</span><br><span class="line">          .limit(<span class="number">10</span>)</span><br><span class="line">          .toList();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Iterables-amp-Iterators"><a href="#Iterables-amp-Iterators" class="headerlink" title="Iterables &amp; Iterators"></a>Iterables &amp; Iterators</h2><p>迭代器</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Iterables#removeIf()</span><br><span class="line">com.google.common.collect.Iterables#getOnlyElement(java.lang.Iterable&lt;T&gt;)   // 获取一个元素</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">com.google.common.collect.Lists#newArrayList()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><h2 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h2><h2 id="Queues"><a href="#Queues" class="headerlink" title="Queues"></a>Queues</h2><h2 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h2><h2 id="ObjectArrays"><a href="#ObjectArrays" class="headerlink" title="ObjectArrays"></a>ObjectArrays</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">com.google.common.collect.ObjectArrays#newArray(java.lang.Class&lt;T&gt;, int) // 创建数组</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Guava</category>
+      </categories>
+      <tags>
+        <tag>Guava-common-collections</tag>
+      </tags>
+  </entry>
 </search>

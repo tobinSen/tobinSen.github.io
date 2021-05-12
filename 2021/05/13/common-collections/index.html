@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-pace-theme-center-atom.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"a6one.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="简介：用于操作集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Guava-collections">
+<meta property="og:url" content="http://a6one.github.io/2021/05/13/common-collections/index.html">
+<meta property="og:site_name" content="动人の橘子">
+<meta property="og:description" content="简介：用于操作集合">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://a6one.github.io/2021/05/13/common-collections/common-collections.png">
+<meta property="article:published_time" content="2021-05-13T05:52:34.000Z">
+<meta property="article:modified_time" content="2021-05-13T05:00:00.000Z">
+<meta property="article:author" content="a6one">
+<meta property="article:tag" content="Guava-common-collections">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://a6one.github.io/2021/05/13/common-collections/common-collections.png">
+
+<link rel="canonical" href="http://a6one.github.io/2021/05/13/common-collections/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Guava-collections | 动人の橘子</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <a target="_blank" rel="noopener" href="https://github.com/a6one" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">动人の橘子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Give it a try</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/05/13/common-collections/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.png">
+      <meta itemprop="name" content="a6one">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="动人の橘子">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Guava-collections
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-13 13:52:34 / 修改时间：13:00:00" itemprop="dateCreated datePublished" datetime="2021-05-13T13:52:34+08:00">2021-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Guava/" itemprop="url" rel="index"><span itemprop="name">Guava</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/05/13/common-collections/" class="post-meta-item leancloud_visitors" data-flag-title="Guava-collections" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/05/13/common-collections/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/13/common-collections/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.5k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>简介：用于操作集合</p>
+<img src="/2021/05/13/common-collections/common-collections.png" style="zoom: 50%;">
+
+<a id="more"></a>
+
+<h2 id="BiMap"><a href="#BiMap" class="headerlink" title="BiMap"></a>BiMap</h2><p>通过key找value，也可以使用value找key。其实现类:</p>
+<p><code>ImmutableBiMap</code> 、<code>SingletonImmutableBiMap</code>  、<code>RegularImmutableBiMap</code> 、<code>RegularImmutableBiMap</code> 、<code>JdkBackedImmutableBiMap</code> </p>
+<p><code>HashBiMap</code> </p>
+<p><code>AbstractBiMap</code> 、<code>EnumHashBiMap</code> 、<code>EnumBiMap</code> </p>
+<h3 id="ImmutableBiMap"><a href="#ImmutableBiMap" class="headerlink" title="ImmutableBiMap"></a>ImmutableBiMap</h3><p>用于操作不可变类的BiMap</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ImmutableBiMap#of(K, V)         // 插入k,v</span><br><span class="line">com.google.common.collect.ImmutableBiMap#of(K, V, K, V)   // 插入多个kv</span><br><span class="line">com.google.common.collect.ImmutableBiMap#copyOf(java.util.Map&lt;? extends K,? extends V&gt;) // 将一个map转换为Immutable类型</span><br><span class="line">com.google.common.collect.ImmutableBiMap#values()         // 获取所有value的值</span><br></pre></td></tr></table></figure>
+
+<h3 id="SingletonImmutableBiMap"><a href="#SingletonImmutableBiMap" class="headerlink" title="SingletonImmutableBiMap"></a>SingletonImmutableBiMap</h3><p>只能存储单个key-value值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K, V&gt; <span class="function">ImmutableBiMap&lt;K, V&gt; <span class="title">of</span><span class="params">(K k1, V v1)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SingletonImmutableBiMap&lt;&gt;(k1, v1);          <span class="comment">// 只能通过这个方法进行创建</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="RegularImmutableBiMap"><a href="#RegularImmutableBiMap" class="headerlink" title="RegularImmutableBiMap"></a>RegularImmutableBiMap</h3><p>常规的ImmutableBiMap的创建</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K, V&gt; <span class="function">ImmutableBiMap&lt;K, V&gt; <span class="title">of</span><span class="params">(K k1, V v1, K k2, V v2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> RegularImmutableBiMap.fromEntries(entryOf(k1, v1), entryOf(k2, v2));    <span class="comment">// 只能通过这个方法进行创建</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="HashBiMap"><a href="#HashBiMap" class="headerlink" title="HashBiMap"></a>HashBiMap</h3><p>基于hashMap的实现</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.HashBiMap#create()        // 创建一个HashBiMap对象</span><br><span class="line">com.google.common.collect.HashBiMap#containsKey(K)  // 是否包含key</span><br><span class="line">com.google.common.collect.HashBiMap#containsValue(V) // 是否包含value</span><br><span class="line">com.google.common.collect.HashBiMap#get(K)          // 通过key获取value</span><br><span class="line">com.google.common.collect.HashBiMap#put(K, V)       // 插入值</span><br><span class="line">com.google.common.collect.HashBiMap#forcePut(K,V)   // 强制性插入</span><br><span class="line">com.google.common.collect.HashBiMap#putInverse(V,K) // 逆序插入，先插入value,在插入key</span><br><span class="line">com.google.common.collect.HashBiMap#remove(K)       // 删除Key</span><br><span class="line">com.google.common.collect.HashBiMap#inverse()       // 逆序显示</span><br></pre></td></tr></table></figure>
+
+<h3 id="AbstractBiMap"><a href="#AbstractBiMap" class="headerlink" title="AbstractBiMap"></a>AbstractBiMap</h3><h3 id="EnumHashBiMap"><a href="#EnumHashBiMap" class="headerlink" title="EnumHashBiMap"></a>EnumHashBiMap</h3><p>用于操作枚举的BiMap</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.EnumHashBiMap#create(java.lang.Class&lt;K&gt;)      // 基于枚举Key来创建</span><br><span class="line">com.google.common.collect.EnumHashBiMap#put(K,V)                        // 插入</span><br><span class="line">com.google.common.collect.EnumHashBiMap#forcePut(K,V)                   // 强制插入</span><br></pre></td></tr></table></figure>
+
+<h3 id="EnumBiMap"><a href="#EnumBiMap" class="headerlink" title="EnumBiMap"></a>EnumBiMap</h3><p>用于操作枚举</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.EnumBiMap#create(java.lang.Class&lt;K&gt;, java.lang.Class&lt;V&gt;)   // 基于枚举Key来创建</span><br><span class="line">com.google.common.collect.EnumBiMap#keyType()          // key类型</span><br><span class="line">com.google.common.collect.EnumBiMap#valueType()        // value类型</span><br></pre></td></tr></table></figure>
+
+<h2 id="Multimap"><a href="#Multimap" class="headerlink" title="Multimap"></a>Multimap</h2><p>用操作多key的情况，其实现类。本质上就是List&lt;Key,Collection<Value>&gt; 类型存储</Value></p>
+<p><code>ForwardingMultimap</code> 、<code>ForwardingListMultimap</code> 、<code>ForwardingSetMultimap</code> 、<code>ForwardingSortedSetMultimap</code></p>
+<p><code>ListMultimap</code> 、<code>LinkedListMultimap</code> 、<code>AbstractListMultimap</code> 、<code>ArrayListMultimap</code> 、<code>FilteredKeyListMultimap</code>、<code>ForwardingListMultimap</code> 、<code>ImmutableListMultimap</code> </p>
+<p><code>AbstractMultimap</code> 、<code>LinkedListMultimap</code>、<code>AbstractMapBasedMultimap</code> 、<code>LinkedHashMultimap</code> 、<code>HashMultimap</code> 、<code>TreeMultimap</code>、<code>FilteredEntrySetMultimap</code> 、<code>ImmutableMultimap</code> 、<code>FilteredKeyListMultimap</code> 、<code>FilteredKeySetMultimap</code> 、</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Multimap#containsKey()      // 包含key</span><br><span class="line">com.google.common.collect.Multimap#containsValue()    // 包含value</span><br><span class="line">com.google.common.collect.Multimap#put(K,V)           // 新增</span><br><span class="line">com.google.common.collect.Multimap#replaceValues()    // 替换</span><br><span class="line">com.google.common.collect.Multimap#get(K)             // 获取</span><br><span class="line">com.google.common.collect.Multimap#forEach()          // 遍历</span><br><span class="line">com.google.common.collect.Multimap#asMap()            // 视图</span><br></pre></td></tr></table></figure>
+
+<h3 id="Multimaps"><a href="#Multimaps" class="headerlink" title="Multimaps"></a>Multimaps</h3><p>用于操作Multimap的工具</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Multimaps#toMultimap(Function,Function,Supplier)      // 创建一个Mulimap</span><br><span class="line"><span class="comment">// stream + mulitmap 的操作 </span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> ListMultimap&lt;Character, String&gt; FIRST_LETTER_MULTIMAP =</span><br><span class="line">   Stream.of(<span class="string">&quot;banana&quot;</span>, <span class="string">&quot;apple&quot;</span>, <span class="string">&quot;carrot&quot;</span>, <span class="string">&quot;asparagus&quot;</span>, <span class="string">&quot;cherry&quot;</span>)</span><br><span class="line">            .collect(</span><br><span class="line">                toMultimap(</span><br><span class="line">                     str -&gt; str.charAt(<span class="number">0</span>),</span><br><span class="line">                     str -&gt; str.substring(<span class="number">1</span>),</span><br><span class="line">                     MultimapBuilder.treeKeys().arrayListValues()::build));</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Multimaps#flatteningToMultimap()                // 并行创建</span><br><span class="line">com.google.common.collect.Multimaps#newListMultimap(Map,Supplier)         // 创建MultiListMap</span><br><span class="line">com.google.common.collect.Multimaps#newSetMultimap(Map,Supplier)          // 创建MultiSetMap</span><br><span class="line">com.google.common.collect.Multimaps#newSortedSetMultimap(Map,Supplier)    // 创建MulitSortSetMap</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Multimaps#invertFrom(src,dest)                  // 将值进行转换后返回</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Multimaps#synchronizedMultimap()        </span><br><span class="line">com.google.common.collect.Multimaps#unmodifiableMultimap(com.google.common.collect.Multimap&lt;K,V&gt;) </span><br><span class="line">com.google.common.collect.Multimaps#asMap(com.google.common.collect.ListMultimap&lt;K,V&gt;)     // 返回视图</span><br><span class="line">com.google.common.collect.Multimaps#forMap(Map)                           // 将map转换为MulitiMap</span><br><span class="line">com.google.common.collect.Multimaps#transformValues(com.google.common.collect.ListMultimap&lt;K,V1&gt;, com.google.common.base.Function&lt;? super V1,V2&gt;)   // 对value进行转换</span><br><span class="line">com.google.common.collect.Multimaps#transformEntries(com.google.common.collect.Multimap&lt;K,V1&gt;, com.google.common.collect.Maps.EntryTransformer&lt;? super K,? super V1,V2&gt;) // 对key value进行转换</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Multimaps#filterKeys(com.google.common.collect.ListMultimap&lt;K,V&gt;, com.google.common.base.Predicate&lt;? super K&gt;) // 过滤key</span><br><span class="line">com.google.common.collect.Multimaps#filterValues(com.google.common.collect.SetMultimap&lt;K,V&gt;, com.google.common.base.Predicate&lt;? super V&gt;) // 过滤value</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="MultimapBuilder"><a href="#MultimapBuilder" class="headerlink" title="MultimapBuilder"></a>MultimapBuilder</h3><p>用于构建MuliMap</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.MultimapBuilder#hashKeys()       // 预定义key的数据类型为hash</span><br><span class="line">com.google.common.collect.MultimapBuilder#linkedHashKeys() // 预定义key的数据类型为LinkedHash</span><br><span class="line">com.google.common.collect.MultimapBuilder#treeKeys()       // 预定义key的数据类型为tree</span><br><span class="line">com.google.common.collect.MultimapBuilder#enumKeys()       // 定义枚举key</span><br><span class="line"></span><br><span class="line">com.google.common.collect.MultimapBuilder.MultimapBuilderWithKeys#arrayListValues() // 定义value的类型</span><br><span class="line">com.google.common.collect.MultimapBuilder.MultimapBuilderWithKeys#linkedListValues()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Multiset"><a href="#Multiset" class="headerlink" title="Multiset"></a>Multiset</h2><p>用于多个key存储在set集合中，其中实现类有</p>
+<p><code>SortedMultiset</code> 、<code>TreeMultiset</code> 、<code>ImmutableMultiset</code> 、<code>ConcurrentHashMultiset</code> 、<code>HashMultiset</code> 、<code>LinkedHashMultiset</code></p>
+<p> <code>EnumMultiset</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Multiset#count(E)           // 统计元素在Set中的个数</span><br><span class="line">com.google.common.collect.Multiset#add(E, int)        // 添加几个元素</span><br><span class="line">com.google.common.collect.Multiset#remove(java.lang.Object) // 删除</span><br><span class="line">com.google.common.collect.Multiset#setCount(E, int)   // 新增或删除这个元素在set中的次数</span><br><span class="line">com.google.common.collect.Multiset#elementSet()       // 获取所有元素去重了的</span><br><span class="line">com.google.common.collect.Multiset#entrySet()         // 所有元素</span><br><span class="line">com.google.common.collect.Multiset#forEachEntry()     // 遍历</span><br></pre></td></tr></table></figure>
+
+<h3 id="Multisets"><a href="#Multisets" class="headerlink" title="Multisets"></a>Multisets</h3><p>用于构建MuliSet</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Multisets#toMultiset()       // 创建MultiSet对象</span><br><span class="line">com.google.common.collect.Multisets#unmodifiableMultiset(com.google.common.collect.Multiset&lt;? extends E&gt;) // 不可变</span><br><span class="line">com.google.common.collect.Multisets#filter()           // set中元素进行过滤</span><br><span class="line">com.google.common.collect.Multisets#union()            // 合并</span><br><span class="line">com.google.common.collect.Multisets#intersection()     // 交接</span><br><span class="line">com.google.common.collect.Multisets#difference()       // 不同点</span><br><span class="line">com.google.common.collect.Multisets#removeOccurrences(com.google.common.collect.Multiset&lt;?&gt;, java.lang.Iterable&lt;?&gt;) // 移除</span><br></pre></td></tr></table></figure>
+
+<h2 id="Range-amp-Cut-amp-ContiguousSet"><a href="#Range-amp-Cut-amp-ContiguousSet" class="headerlink" title="Range &amp; Cut &amp; ContiguousSet"></a>Range &amp; Cut &amp; ContiguousSet</h2><p>操作范围</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Range#create(Cut,Cut)      // 创建</span><br><span class="line">com.google.common.collect.Range#open()               // 创建</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Cut#aboveValue()           // 以上的值</span><br><span class="line">com.google.common.collect.Cut#belowValue()           // 以下的值</span><br><span class="line"></span><br><span class="line">com.google.common.collect.Cut#belowAll()</span><br><span class="line">com.google.common.collect.Cut#aboveAll()</span><br><span class="line"></span><br><span class="line">ContiguousSet.create(Range.closed(<span class="number">5</span>, <span class="number">42</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="RangeMap"><a href="#RangeMap" class="headerlink" title="RangeMap"></a>RangeMap</h2><p>用于范围map存储，其实现类：<code>ImmutableRangeMap</code> 、<code>TreeRangeMap</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.RangeMap#get(K)           // 通过key获取</span><br><span class="line">com.google.common.collect.RangeMap#getEntry()       // key的范围</span><br><span class="line">com.google.common.collect.RangeMap#span()           // 返回最小的范围</span><br><span class="line">com.google.common.collect.RangeMap#put(Range,V)     // 新增</span><br><span class="line">com.google.common.collect.RangeMap#putCoalescing()  // 具有相同值的进行范围合并</span><br><span class="line"></span><br><span class="line">com.google.common.collect.RangeMap#merge()          // range拆分</span><br><span class="line">rangeMap.put(Range.closedOpen(<span class="number">0</span>, <span class="number">3</span>), <span class="number">1</span>);</span><br><span class="line">rangeMap.merge(Range.closedOpen(<span class="number">1</span>, <span class="number">2</span>), <span class="number">2</span>, Integer::sum);</span><br></pre></td></tr></table></figure>
+
+<h3 id="ImmutableRangeMap"><a href="#ImmutableRangeMap" class="headerlink" title="ImmutableRangeMap"></a>ImmutableRangeMap</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ImmutableRangeMap#of() </span><br></pre></td></tr></table></figure>
+
+<h3 id="TreeRangeMap"><a href="#TreeRangeMap" class="headerlink" title="TreeRangeMap"></a>TreeRangeMap</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.TreeRangeMap#create()      // 创建TreeRangeMap</span><br></pre></td></tr></table></figure>
+
+<h2 id="RangeSet"><a href="#RangeSet" class="headerlink" title="RangeSet"></a>RangeSet</h2><p>用于存储范围，其实现类：<code>ImmutableRangeSet</code> 、 <code>TreeRangeSet</code> </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.RangeSet#add(Range)        // 新增</span><br><span class="line">com.google.common.collect.RangeSet#contains()        // 判断值是否存在</span><br><span class="line">com.google.common.collect.RangeSet#rangeContaining() // 返回包含这个值的Range</span><br><span class="line">com.google.common.collect.RangeSet#intersects()      // 交叉</span><br><span class="line">com.google.common.collect.RangeSet#encloses()        // 范围包含</span><br></pre></td></tr></table></figure>
+
+<h3 id="ImmutableRangeSet"><a href="#ImmutableRangeSet" class="headerlink" title="ImmutableRangeSet"></a>ImmutableRangeSet</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ImmutableRangeSet#toImmutableRangeSet()</span><br></pre></td></tr></table></figure>
+
+<h3 id="TreeRangeSet"><a href="#TreeRangeSet" class="headerlink" title="TreeRangeSet"></a>TreeRangeSet</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.TreeRangeSet#create()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Table"><a href="#Table" class="headerlink" title="Table"></a>Table</h2><p>用于操作表格，实现类：<code>ArrayTable</code> 、<code>HashBasedTable</code> 、<code>ImmutableTable</code> 、<code>TreeBasedTable</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Table#contains(R,C)        // 包含对应的行，列</span><br><span class="line">com.google.common.collect.Table#get(R,C)             // cell</span><br><span class="line">com.google.common.collect.Table#put(R,C,V)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tables"><a href="#Tables" class="headerlink" title="Tables"></a>Tables</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.google.common.collect.Tables#toTable(java.util.function.Function&lt;? super T,? extends R&gt;, java.util.function.Function&lt;? super T,? extends C&gt;, java.util.function.Function&lt;? super T,? extends V&gt;, java.util.function.Supplier&lt;I&gt;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="ArrayTable"><a href="#ArrayTable" class="headerlink" title="ArrayTable"></a>ArrayTable</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ArrayTable#create(java.lang.Iterable&lt;? extends R&gt;, java.lang.Iterable&lt;? extends C&gt;) </span><br></pre></td></tr></table></figure>
+
+<h3 id="HashBasedTable"><a href="#HashBasedTable" class="headerlink" title="HashBasedTable"></a>HashBasedTable</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.HashBasedTable#create()</span><br></pre></td></tr></table></figure>
+
+<h3 id="TreeBasedTable"><a href="#TreeBasedTable" class="headerlink" title="TreeBasedTable"></a>TreeBasedTable</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.TreeBasedTable#create()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Ordering"><a href="#Ordering" class="headerlink" title="Ordering"></a>Ordering</h2><p>用于排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Ordering#natural()     // 自然排序</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Comparators"><a href="#Comparators" class="headerlink" title="Comparators"></a>Comparators</h2><p>用于排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Comparators#least() // 相对于指定key最小的值</span><br><span class="line"><span class="comment">// stream + comparators 运作</span></span><br><span class="line">Stream.of(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;quux&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;elephant&quot;</span>)</span><br><span class="line">       .collect(least(<span class="number">2</span>, comparingInt(String::length)))</span><br><span class="line">   <span class="comment">// returns &#123;&quot;foo&quot;, &quot;quux&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ComparisonChain"><a href="#ComparisonChain" class="headerlink" title="ComparisonChain"></a>ComparisonChain</h2><p>过滤器链</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.ComparisonChain#start() </span><br><span class="line">com.google.common.collect.ComparisonChain#compare(int, int) // 比较</span><br></pre></td></tr></table></figure>
+
+<h2 id="FluentIterable"><a href="#FluentIterable" class="headerlink" title="FluentIterable"></a>FluentIterable</h2><p>迭代器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">ImmutableList&lt;String&gt; results =</span><br><span class="line">      FluentIterable.from(database.getClientList())</span><br><span class="line">          .filter(Client::isActiveInLastMonth)</span><br><span class="line">          .transform(Object::toString)</span><br><span class="line">          .limit(<span class="number">10</span>)</span><br><span class="line">          .toList();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Iterables-amp-Iterators"><a href="#Iterables-amp-Iterators" class="headerlink" title="Iterables &amp; Iterators"></a>Iterables &amp; Iterators</h2><p>迭代器</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见方法</span></span><br><span class="line">com.google.common.collect.Iterables#removeIf()</span><br><span class="line">com.google.common.collect.Iterables#getOnlyElement(java.lang.Iterable&lt;T&gt;)   // 获取一个元素</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.google.common.collect.Lists#newArrayList()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><h2 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h2><h2 id="Queues"><a href="#Queues" class="headerlink" title="Queues"></a>Queues</h2><h2 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h2><h2 id="ObjectArrays"><a href="#ObjectArrays" class="headerlink" title="ObjectArrays"></a>ObjectArrays</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.google.common.collect.ObjectArrays#newArray(java.lang.Class&lt;T&gt;, int) // 创建数组</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Guava-common-collections/" rel="tag"># Guava-common-collections</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/11/Apache-codec/" rel="prev" title="Apache-codec">
+      <i class="fa fa-chevron-left"></i> Apache-codec
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/13/common-io/" rel="next" title="Guava-io">
+      Guava-io <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BiMap"><span class="nav-number">1.</span> <span class="nav-text">BiMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ImmutableBiMap"><span class="nav-number">1.1.</span> <span class="nav-text">ImmutableBiMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SingletonImmutableBiMap"><span class="nav-number">1.2.</span> <span class="nav-text">SingletonImmutableBiMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RegularImmutableBiMap"><span class="nav-number">1.3.</span> <span class="nav-text">RegularImmutableBiMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashBiMap"><span class="nav-number">1.4.</span> <span class="nav-text">HashBiMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AbstractBiMap"><span class="nav-number">1.5.</span> <span class="nav-text">AbstractBiMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EnumHashBiMap"><span class="nav-number">1.6.</span> <span class="nav-text">EnumHashBiMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EnumBiMap"><span class="nav-number">1.7.</span> <span class="nav-text">EnumBiMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multimap"><span class="nav-number">2.</span> <span class="nav-text">Multimap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multimaps"><span class="nav-number">2.1.</span> <span class="nav-text">Multimaps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MultimapBuilder"><span class="nav-number">2.2.</span> <span class="nav-text">MultimapBuilder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiset"><span class="nav-number">3.</span> <span class="nav-text">Multiset</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multisets"><span class="nav-number">3.1.</span> <span class="nav-text">Multisets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Range-amp-Cut-amp-ContiguousSet"><span class="nav-number">4.</span> <span class="nav-text">Range &amp; Cut &amp; ContiguousSet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RangeMap"><span class="nav-number">5.</span> <span class="nav-text">RangeMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ImmutableRangeMap"><span class="nav-number">5.1.</span> <span class="nav-text">ImmutableRangeMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeRangeMap"><span class="nav-number">5.2.</span> <span class="nav-text">TreeRangeMap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RangeSet"><span class="nav-number">6.</span> <span class="nav-text">RangeSet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ImmutableRangeSet"><span class="nav-number">6.1.</span> <span class="nav-text">ImmutableRangeSet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeRangeSet"><span class="nav-number">6.2.</span> <span class="nav-text">TreeRangeSet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Table"><span class="nav-number">7.</span> <span class="nav-text">Table</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tables"><span class="nav-number">7.1.</span> <span class="nav-text">Tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayTable"><span class="nav-number">7.2.</span> <span class="nav-text">ArrayTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashBasedTable"><span class="nav-number">7.3.</span> <span class="nav-text">HashBasedTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TreeBasedTable"><span class="nav-number">7.4.</span> <span class="nav-text">TreeBasedTable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ordering"><span class="nav-number">8.</span> <span class="nav-text">Ordering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comparators"><span class="nav-number">9.</span> <span class="nav-text">Comparators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ComparisonChain"><span class="nav-number">10.</span> <span class="nav-text">ComparisonChain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FluentIterable"><span class="nav-number">11.</span> <span class="nav-text">FluentIterable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterables-amp-Iterators"><span class="nav-number">12.</span> <span class="nav-text">Iterables &amp; Iterators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lists"><span class="nav-number">13.</span> <span class="nav-text">Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maps"><span class="nav-number">14.</span> <span class="nav-text">Maps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sets"><span class="nav-number">15.</span> <span class="nav-text">Sets</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queues"><span class="nav-number">16.</span> <span class="nav-text">Queues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Streams"><span class="nav-number">17.</span> <span class="nav-text">Streams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ObjectArrays"><span class="nav-number">18.</span> <span class="nav-text">ObjectArrays</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="a6one"
+      src="/images/header.png">
+  <p class="site-author-name" itemprop="name">a6one</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/a6one" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;a6one" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1245007716@qq.com" title="E-Mail → mailto:1245007716@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://github.com/a6one" title="https:&#x2F;&#x2F;github.com&#x2F;a6one" rel="noopener" target="_blank">a6one</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">a6one@tj</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">86k</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div> -->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"63gAbkTkHVF9Ms1zlIYbJKX3-gzGzoHsz","app_key":"aXAAepLkG1fMcFSVGByK8QeO","server_url":null,"security":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '63gAbkTkHVF9Ms1zlIYbJKX3-gzGzoHsz',
+      appKey     : 'aXAAepLkG1fMcFSVGByK8QeO',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
