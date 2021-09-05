@@ -189,6 +189,148 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/09/05/bytebuddy/ByteBuddy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.png">
+      <meta itemprop="name" content="a6one">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="动人の橘子">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/05/bytebuddy/ByteBuddy/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-05 06:30:26" itemprop="dateCreated datePublished" datetime="2021-09-05T06:30:26+08:00">2021-09-05</time>
+            </span>
+
+          
+            <span id="/2021/09/05/bytebuddy/ByteBuddy/" class="post-meta-item leancloud_visitors" data-flag-title="" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/09/05/bytebuddy/ByteBuddy/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/09/05/bytebuddy/ByteBuddy/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ByteBuddy"><a href="#ByteBuddy" class="headerlink" title="ByteBuddy"></a>ByteBuddy</h1><p>简介：ByteBuddy是一个可以在运行时动态生成java class的类库</p>
+<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;net.bytebuddy&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;byte-buddy&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; dynamicType &#x3D; new ByteBuddy()</span><br><span class="line">        &#x2F;&#x2F; 指定父类</span><br><span class="line">        .subclass(Object.class)</span><br><span class="line">        &#x2F;&#x2F; 根据名称来匹配需要拦截的方法</span><br><span class="line">        .method(ElementMatchers.named(&quot;toString&quot;))</span><br><span class="line">        &#x2F;&#x2F; 拦截方法调用，返回固定值</span><br><span class="line">        .intercept(FixedValue.value(&quot;Hello World!&quot;))</span><br><span class="line">        &#x2F;&#x2F; 产生字节码</span><br><span class="line">        .make()</span><br><span class="line">        &#x2F;&#x2F; 加载类</span><br><span class="line">        .load(BytebuddyDemo.class.getClassLoader())</span><br><span class="line">        &#x2F;&#x2F; 获得Class对象</span><br><span class="line">        .getLoaded();</span><br></pre></td></tr></table></figure>
+
+<h2 id="核心方法"><a href="#核心方法" class="headerlink" title="核心方法"></a>核心方法</h2><h3 id="subclass"><a href="#subclass" class="headerlink" title="subclass"></a>subclass</h3><p>基于clazz来创建一个子类</p>
+<h3 id="makeInterface"><a href="#makeInterface" class="headerlink" title="makeInterface"></a>makeInterface</h3><p>创建一个接口</p>
+<h3 id="makePackage"><a href="#makePackage" class="headerlink" title="makePackage"></a>makePackage</h3><p>创建一个包路径</p>
+<h3 id="makeAnnotation"><a href="#makeAnnotation" class="headerlink" title="makeAnnotation"></a>makeAnnotation</h3><p>创建一个注解</p>
+<h3 id="makeEnumeration"><a href="#makeEnumeration" class="headerlink" title="makeEnumeration"></a>makeEnumeration</h3><p>创建一个枚举</p>
+<h3 id="redefine"><a href="#redefine" class="headerlink" title="redefine"></a>redefine</h3><p>重新定义一个class类(修改目标类的区域，覆盖式，原先的类的区域会丢失)</p>
+<h3 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h3><p>同redefine的作用。但是他会先将原先的父方法进行名称的修改。新的方法替换掉原先的方法，在内部对原先的方法进行一次调用</p>
+<h3 id="with"><a href="#with" class="headerlink" title="with"></a>with</h3><p>所有的类文件都会应用到这个配置</p>
+<h3 id="ignore"><a href="#ignore" class="headerlink" title="ignore"></a>ignore</h3><p>忽略掉一些方法匹配</p>
+<h2 id="Builder常见方法"><a href="#Builder常见方法" class="headerlink" title="Builder常见方法"></a>Builder常见方法</h2><p>name：创建一个类名、接口名、枚举名、注解名</p>
+<p>modifiers: 标识类、接口修饰符Opcodes.ACC_PUBLIC</p>
+<p>annotateType：标识注解类型</p>
+<p>implement：实现接口</p>
+<p>typeVariable：定义一个类型变量</p>
+<p>transform：进行类型变量的转换</p>
+<p>defineField：定义一个字段</p>
+<p>defineMethod：定义方法</p>
+<p>defineConstructor：定义构造器</p>
+<p>define：重新定义</p>
+<p>method：方法匹配器</p>
+<p>constructor：构造方法匹配器</p>
+<p>invokable：方法和构造方法匹配器</p>
+<p>make：创建这个类型</p>
+<h3 id="ElementMatcher"><a href="#ElementMatcher" class="headerlink" title="ElementMatcher"></a>ElementMatcher</h3><p>匹配器</p>
+<p>named：匹配元素名称</p>
+<p>isMethod：匹配元素是否是方法</p>
+<p>案例：</p>
+<p>1、匹配类中所有public方法<br>.method(ElementMatchers.isPublic())</p>
+<p>2、匹配名称为helloWorld且可见性为public的所有方法<br>.method(ElementMatchers.isPublic().and(ElementMatchers.named(“helloWorld”)))</p>
+<p>3、匹配名称为helloWorld且可见性为public但返回值类型不为String的所有方法<br>.method(ElementMatchers.isPublic().and(ElementMatchers.named(“helloWorld”)).and(ElementMatchers.not(ElementMatchers.returns(String.class))))</p>
+<p>4、匹配名称为helloWorld且第二个入参为String类型的所有方法<br>.method(ElementMatchers.isPublic().and(ElementMatchers.named(“helloWorld”)).and(ElementMatchers.takesArgument(1, String.class)))</p>
+<h3 id="implement方法"><a href="#implement方法" class="headerlink" title="implement方法"></a>implement方法</h3><p>MethodDefinition.ImplementationDefinition.Optional的方法</p>
+<p>intercept：拦截</p>
+<p>Implementation方法</p>
+<p>FixedValue：返回固定的值</p>
+<p><strong>MethodDelegation</strong>：将方法委派由其他方法来执行（<strong>委派类中的方法必须和被委派类中的方法保持一致</strong>）</p>
+<p>MethodCall：基于方法回调</p>
+<p>InvokeDynamic：基于动态回调</p>
+<p>DefaultMethodCall：基于默认方法回调</p>
+<p>ExceptionMethod：基于异常方法调用</p>
+<p>InvocationHandlerAdapter：调用自定义</p>
+<p>withoutCode：接口方法为空代码抽象方法</p>
+<p>defaultValue：返回一个注解返回值</p>
+<p>注解                  说明<br>@Argument           绑定单个参数<br>@AllArguments       绑定所有参数的数组<br>@This               当前被拦截的、动态生成的那个对象<br>@Super              当前被拦截的、动态生成的那个对象的父类对象<br>@Origin             可以绑定到以下类型的参数：</p>
+<pre><code>            Method              被调用的原始方法
+            Constructor         被调用的原始构造器
+            Class               当前动态创建的类
+            MethodHandle
+            MethodType
+            String          动态类的toString()的返回值
+            int             动态方法的修饰符</code></pre>
+<p>@DefaultCall     调用默认方法而非super的方法<br>@SuperCall       用于调用父类版本的方法<br>@Super           注入父类型对象，可以是接口，从而调用它的任何方法<br>@RuntimeType     可以用在返回值、参数上，提示ByteBuddy禁用严格的类型检查<br>@Empty           注入参数的类型的默认值<br>@StubValue       注入一个存根值。对于返回引用、void的方法，注入null；对于返回原始类型的方法，注入0<br>@FieldValue      注入被拦截对象的一个字段的值<br>@Morph           类似于@SuperCall，但是允许指定调用参数</p>
+<h3 id="委派类中使用的常见注解"><a href="#委派类中使用的常见注解" class="headerlink" title="委派类中使用的常见注解"></a>委派类中使用的常见注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Super 使用了@Super注解的委托类对象，此时这个被注解的入参在进行最似匹配时会被忽略，bytebuddy匹配到的依然是只有一个String入参的委托方法</span></span><br><span class="line"><span class="comment">// @Super 修饰被委派类的实例对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegateMooWithSuper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Moo1</span><span class="params">(String param1, <span class="meta">@Super</span> Moo zuper)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;invoke time:&quot;</span> + System.currentTimeMillis());</span><br><span class="line">        <span class="keyword">return</span> zuper.Moo1(param1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果不需要修改入参，或者在被委托方法中调用超类其它方法，也可以使用@superCall注解</span></span><br><span class="line"><span class="comment">// 调用callable的call方法可以获取被委托方法的实现结果</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Moo</span><span class="params">(String param1, Integer param2,</span></span></span><br><span class="line"><span class="function"><span class="params">                             <span class="meta">@SuperCall</span> Callable&lt;String&gt; superCall)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String superCallResult = superCall.call();</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;wrapped by delegate:&#123;&quot;</span> + superCallResult + <span class="string">&quot;&#125;&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// @FieldValue</span></span><br><span class="line"><span class="comment">// 之后我们就可以通过反射给name注入值了，在后续方法的代理实现中也可以通过@FieldValue注解使用这个原本的类中不存在的属性</span></span><br><span class="line"><span class="comment">// 我们通过DelegateWithField代理原始类的Moo1方法，同时打印出传参和name属性的值</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegateWithField</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Moo1</span><span class="params">(String param1, <span class="meta">@FieldValue(value = &quot;name&quot;)</span> String name)</span> <span class="keyword">throws</span> Exception </span>&#123;<span class="keyword">return</span> <span class="string">&quot;parm1:&quot;</span> + param1 + <span class="string">&quot;;name:&quot;</span> + name;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/09/04/Reflect/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -269,6 +411,212 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/09/04/Reflect/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/09/04/byteBuddy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.png">
+      <meta itemprop="name" content="a6one">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="动人の橘子">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/04/byteBuddy/" class="post-title-link" itemprop="url">bytebuddy</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-04 20:23:00" itemprop="dateCreated datePublished" datetime="2021-09-04T20:23:00+08:00">2021-09-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/bytebuddy/" itemprop="url" rel="index"><span itemprop="name">bytebuddy</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/09/04/byteBuddy/" class="post-meta-item leancloud_visitors" data-flag-title="bytebuddy" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/09/04/byteBuddy/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/09/04/byteBuddy/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ByteBuddy"><a href="#ByteBuddy" class="headerlink" title="ByteBuddy"></a>ByteBuddy</h1><p>简介：ByteBuddy是一个可以在运行时动态生成java class的类库</p>
+<img src="/2021/09/04/byteBuddy/bytebuddy.png" style="zoom: 50%;">
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/04/byteBuddy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/09/04/javassist/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.png">
+      <meta itemprop="name" content="a6one">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="动人の橘子">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/04/javassist/" class="post-title-link" itemprop="url">javassist</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-04 20:23:00" itemprop="dateCreated datePublished" datetime="2021-09-04T20:23:00+08:00">2021-09-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javassist/" itemprop="url" rel="index"><span itemprop="name">javassist</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/09/04/javassist/" class="post-meta-item leancloud_visitors" data-flag-title="javassist" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/09/04/javassist/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/09/04/javassist/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="javassist"><a href="#javassist" class="headerlink" title="javassist"></a>javassist</h1><p>简介：Java字节码以二进制的形式存储在.class文件中，每一个.class文件包含一个Java类或接口。Javassist就是一个用来处理Java字节码的类库。它可以在一个<strong>已经编译好的类</strong>中添加新的方法，并且不需要对字节码方面有深入的了解。同时也可以去生成一个新的类对象，通过完全手动的方式</p>
+<img src="/2021/09/04/javassist/javassist.png" style="zoom: 50%;">
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/04/javassist/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -912,323 +1260,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/05/11/Apache-math/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.png">
-      <meta itemprop="name" content="a6one">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="动人の橘子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/11/Apache-math/" class="post-title-link" itemprop="url">Apache-math</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-05-11 13:52:34 / 修改时间：13:00:00" itemprop="dateCreated datePublished" datetime="2021-05-11T13:52:34+08:00">2021-05-11</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/apache-common/" itemprop="url" rel="index"><span itemprop="name">apache-common</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/05/11/Apache-math/" class="post-meta-item leancloud_visitors" data-flag-title="Apache-math" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/11/Apache-math/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/11/Apache-math/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>951</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简介：apache-common-math是用来操作数字方面的工具类</p>
-<img src="/2021/05/11/Apache-math/Apache-math.png" style="zoom: 50%;">
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/11/Apache-math/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/05/11/Apache-collections/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.png">
-      <meta itemprop="name" content="a6one">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="动人の橘子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/11/Apache-collections/" class="post-title-link" itemprop="url">Apache-collections</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-11 11:52:34" itemprop="dateCreated datePublished" datetime="2021-05-11T11:52:34+08:00">2021-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-11 12:00:00" itemprop="dateModified" datetime="2020-05-11T12:00:00+08:00">2020-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/apache-common/" itemprop="url" rel="index"><span itemprop="name">apache-common</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/05/11/Apache-collections/" class="post-meta-item leancloud_visitors" data-flag-title="Apache-collections" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/11/Apache-collections/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/11/Apache-collections/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>27k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简介：Apache-common Collections提供了很多的基于集合间的操作</p>
-<img src="/2021/05/11/Apache-collections/Apache-collections.png" style="zoom: 50%;">
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/11/Apache-collections/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/05/06/idea-debug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.png">
-      <meta itemprop="name" content="a6one">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="动人の橘子">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/06/idea-debug/" class="post-title-link" itemprop="url">idea多线程调试</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-06 01:23:00" itemprop="dateCreated datePublished" datetime="2021-05-06T01:23:00+08:00">2021-05-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/IntelliJ-IDEA/" itemprop="url" rel="index"><span itemprop="name">IntelliJ IDEA</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/05/06/idea-debug/" class="post-meta-item leancloud_visitors" data-flag-title="idea多线程调试" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/05/06/idea-debug/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/05/06/idea-debug/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>897</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简介：记录idea多线程调试</p>
-<img src="/2021/05/06/idea-debug/debug.jpeg" style="zoom: 50%;">
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/05/06/idea-debug/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1300,20 +1331,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1368,7 +1399,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">95k</span>
+    <span title="站点总字数">105k</span>
 </div>
 
 <!--
