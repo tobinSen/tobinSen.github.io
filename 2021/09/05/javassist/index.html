@@ -22,22 +22,22 @@
     var CONFIG = {"hostname":"a6one.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":320,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":3,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="ByteBuddy简介：ByteBuddy是一个可以在运行时动态生成java class的类库">
+  <meta name="description" content="javassist简介：Java字节码以二进制的形式存储在.class文件中，每一个.class文件包含一个Java类或接口。Javassist就是一个用来处理Java字节码的类库。它可以在一个已经编译好的类中添加新的方法，并且不需要对字节码方面有深入的了解。同时也可以去生成一个新的类对象，通过完全手动的方式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bytebuddy">
-<meta property="og:url" content="http://a6one.github.io/2021/09/04/byteBuddy/index.html">
+<meta property="og:title" content="javassist">
+<meta property="og:url" content="http://a6one.github.io/2021/09/05/javassist/index.html">
 <meta property="og:site_name" content="动人の橘子">
-<meta property="og:description" content="ByteBuddy简介：ByteBuddy是一个可以在运行时动态生成java class的类库">
+<meta property="og:description" content="javassist简介：Java字节码以二进制的形式存储在.class文件中，每一个.class文件包含一个Java类或接口。Javassist就是一个用来处理Java字节码的类库。它可以在一个已经编译好的类中添加新的方法，并且不需要对字节码方面有深入的了解。同时也可以去生成一个新的类对象，通过完全手动的方式">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://a6one.github.io/2021/09/04/byteBuddy/bytebuddy.png">
-<meta property="article:published_time" content="2021-09-04T12:23:00.000Z">
-<meta property="article:modified_time" content="2021-09-04T12:23:00.000Z">
+<meta property="og:image" content="http://a6one.github.io/2021/09/05/javassist/javassist.png">
+<meta property="article:published_time" content="2021-09-05T03:23:00.000Z">
+<meta property="article:modified_time" content="2021-09-05T03:23:00.000Z">
 <meta property="article:author" content="a6one">
-<meta property="article:tag" content="bytebuddy">
+<meta property="article:tag" content="javassist">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://a6one.github.io/2021/09/04/byteBuddy/bytebuddy.png">
+<meta name="twitter:image" content="http://a6one.github.io/2021/09/05/javassist/javassist.png">
 
-<link rel="canonical" href="http://a6one.github.io/2021/09/04/byteBuddy/">
+<link rel="canonical" href="http://a6one.github.io/2021/09/05/javassist/">
 
 
 <script id="page-configurations">
@@ -50,7 +50,7 @@
   };
 </script>
 
-  <title>bytebuddy | 动人の橘子</title>
+  <title>javassist | 动人の橘子</title>
   
 
 
@@ -196,7 +196,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/09/04/byteBuddy/">
+    <link itemprop="mainEntityOfPage" href="http://a6one.github.io/2021/09/05/javassist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.png">
@@ -209,7 +209,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          bytebuddy
+          javassist
         </h1>
 
         <div class="post-meta">
@@ -219,7 +219,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-04 20:23:00" itemprop="dateCreated datePublished" datetime="2021-09-04T20:23:00+08:00">2021-09-04</time>
+              <time title="创建时间：2021-09-05 11:23:00" itemprop="dateCreated datePublished" datetime="2021-09-05T11:23:00+08:00">2021-09-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,12 +227,12 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bytebuddy/" itemprop="url" rel="index"><span itemprop="name">bytebuddy</span></a>
+                  <a href="/categories/javassist/" itemprop="url" rel="index"><span itemprop="name">javassist</span></a>
                 </span>
             </span>
 
           
-            <span id="/2021/09/04/byteBuddy/" class="post-meta-item leancloud_visitors" data-flag-title="bytebuddy" title="阅读次数">
+            <span id="/2021/09/05/javassist/" class="post-meta-item leancloud_visitors" data-flag-title="javassist" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -254,8 +254,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2021/09/04/byteBuddy/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2021/09/04/byteBuddy/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/09/05/javassist/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/09/05/javassist/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -265,7 +265,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>2.9k</span>
             </span>
 
         </div>
@@ -277,68 +277,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="ByteBuddy"><a href="#ByteBuddy" class="headerlink" title="ByteBuddy"></a>ByteBuddy</h1><p>简介：ByteBuddy是一个可以在运行时动态生成java class的类库</p>
-<img src="/2021/09/04/byteBuddy/bytebuddy.png" style="zoom: 50%;">
+        <h1 id="javassist"><a href="#javassist" class="headerlink" title="javassist"></a>javassist</h1><p>简介：Java字节码以二进制的形式存储在.class文件中，每一个.class文件包含一个Java类或接口。Javassist就是一个用来处理Java字节码的类库。它可以在一个<strong>已经编译好的类</strong>中添加新的方法，并且不需要对字节码方面有深入的了解。同时也可以去生成一个新的类对象，通过完全手动的方式</p>
+<img src="/2021/09/05/javassist/javassist.png" style="zoom: 50%;">
 
 <a id="more"></a>
 
-<h2 id="引入依赖"><a href="#引入依赖" class="headerlink" title="引入依赖"></a>引入依赖</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;net.bytebuddy&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;byte-buddy&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.7.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.javassist&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;javassist&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;3.25.0-GA&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; dynamicType &#x3D; new ByteBuddy()</span><br><span class="line">        &#x2F;&#x2F; 指定父类</span><br><span class="line">        .subclass(Object.class)</span><br><span class="line">        &#x2F;&#x2F; 根据名称来匹配需要拦截的方法</span><br><span class="line">        .method(ElementMatchers.named(&quot;toString&quot;))</span><br><span class="line">        &#x2F;&#x2F; 拦截方法调用，返回固定值</span><br><span class="line">        .intercept(FixedValue.value(&quot;Hello World!&quot;))</span><br><span class="line">        &#x2F;&#x2F; 产生字节码</span><br><span class="line">        .make()</span><br><span class="line">        &#x2F;&#x2F; 加载类</span><br><span class="line">        .load(BytebuddyDemo.class.getClassLoader())</span><br><span class="line">        &#x2F;&#x2F; 获得Class对象</span><br><span class="line">        .getLoaded();</span><br></pre></td></tr></table></figure>
+<h2 id="2-初体验"><a href="#2-初体验" class="headerlink" title="2.初体验"></a>2.初体验</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">ClassPool pool = ClassPool.getDefault();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.创建一个类</span></span><br><span class="line">CtClass ctClass = pool.makeClass(<span class="string">&quot;javassist.Person&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.新增一个字段 private String name</span></span><br><span class="line">CtField field = <span class="keyword">new</span> CtField(pool.get(<span class="string">&quot;java.lang.String&quot;</span>), <span class="string">&quot;name&quot;</span>, ctClass);</span><br><span class="line">field.setModifiers(Modifier.PRIVATE);</span><br><span class="line">ctClass.addField(field, CtField.Initializer.constant(<span class="string">&quot;tom&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 生成 getter、setter 方法</span></span><br><span class="line">ctClass.addMethod(CtNewMethod.setter(<span class="string">&quot;setName&quot;</span>, field));</span><br><span class="line">ctClass.addMethod(CtNewMethod.getter(<span class="string">&quot;getName&quot;</span>, field));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 添加无参的构造函数</span></span><br><span class="line">CtConstructor cons = <span class="keyword">new</span> CtConstructor(<span class="keyword">new</span> CtClass[]&#123;&#125;, ctClass);</span><br><span class="line">cons.setBody(<span class="string">&quot;&#123;name = \&quot;tom\&quot;;&#125;&quot;</span>);</span><br><span class="line">ctClass.addConstructor(cons);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5. 添加有参的构造函数</span></span><br><span class="line">cons = <span class="keyword">new</span> CtConstructor(<span class="keyword">new</span> CtClass[]&#123;pool.get(<span class="string">&quot;java.lang.String&quot;</span>)&#125;, ctClass);</span><br><span class="line"><span class="comment">// $0=this / $1,$2,$3... 代表方法参数</span></span><br><span class="line">cons.setBody(<span class="string">&quot;&#123;$0.name = $1;&#125;&quot;</span>);</span><br><span class="line">ctClass.addConstructor(cons);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 6. 创建一个名为printName方法，无参数，无返回值，输出name值</span></span><br><span class="line">CtMethod ctMethod = <span class="keyword">new</span> CtMethod(CtClass.voidType, <span class="string">&quot;printName&quot;</span>, <span class="keyword">new</span> CtClass[]&#123;&#125;, ctClass);</span><br><span class="line">ctMethod.setModifiers(Modifier.PUBLIC);</span><br><span class="line">ctMethod.setBody(<span class="string">&quot;&#123;System.out.println(name);&#125;&quot;</span>);</span><br><span class="line">ctClass.addMethod(ctMethod);</span><br><span class="line"></span><br><span class="line">ctClass.toClass();</span><br></pre></td></tr></table></figure>
 
-<h2 id="核心方法"><a href="#核心方法" class="headerlink" title="核心方法"></a>核心方法</h2><h3 id="subclass"><a href="#subclass" class="headerlink" title="subclass"></a>subclass</h3><p>基于clazz来创建一个子类</p>
-<h3 id="makeInterface"><a href="#makeInterface" class="headerlink" title="makeInterface"></a>makeInterface</h3><p>创建一个接口</p>
-<h3 id="makePackage"><a href="#makePackage" class="headerlink" title="makePackage"></a>makePackage</h3><p>创建一个包路径</p>
-<h3 id="makeAnnotation"><a href="#makeAnnotation" class="headerlink" title="makeAnnotation"></a>makeAnnotation</h3><p>创建一个注解</p>
-<h3 id="makeEnumeration"><a href="#makeEnumeration" class="headerlink" title="makeEnumeration"></a>makeEnumeration</h3><p>创建一个枚举</p>
-<h3 id="redefine"><a href="#redefine" class="headerlink" title="redefine"></a>redefine</h3><p>重新定义一个class类(修改目标类的区域，覆盖式，原先的类的区域会丢失)</p>
-<h3 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h3><p>同redefine的作用。但是他会先将原先的父方法进行名称的修改。新的方法替换掉原先的方法，在内部对原先的方法进行一次调用</p>
-<h3 id="with"><a href="#with" class="headerlink" title="with"></a>with</h3><p>所有的类文件都会应用到这个配置</p>
-<h3 id="ignore"><a href="#ignore" class="headerlink" title="ignore"></a>ignore</h3><p>忽略掉一些方法匹配</p>
-<h2 id="Builder常见方法"><a href="#Builder常见方法" class="headerlink" title="Builder常见方法"></a>Builder常见方法</h2><p>name：创建一个类名、接口名、枚举名、注解名</p>
-<p>modifiers: 标识类、接口修饰符Opcodes.ACC_PUBLIC</p>
-<p>annotateType：标识注解类型</p>
-<p>implement：实现接口</p>
-<p>typeVariable：定义一个类型变量</p>
-<p>transform：进行类型变量的转换</p>
-<p>defineField：定义一个字段</p>
-<p>defineMethod：定义方法</p>
-<p>defineConstructor：定义构造器</p>
-<p>define：重新定义</p>
-<p>method：方法匹配器</p>
-<p>constructor：构造方法匹配器</p>
-<p>invokable：方法和构造方法匹配器</p>
-<p>make：创建这个类型</p>
-<h3 id="ElementMatcher"><a href="#ElementMatcher" class="headerlink" title="ElementMatcher"></a>ElementMatcher</h3><p>匹配器</p>
-<p>named：匹配元素名称</p>
-<p>isMethod：匹配元素是否是方法</p>
-<p>案例：</p>
-<p>1、匹配类中所有public方法<br>.method(ElementMatchers.isPublic())</p>
-<p>2、匹配名称为helloWorld且可见性为public的所有方法<br>.method(ElementMatchers.isPublic().and(ElementMatchers.named(“helloWorld”)))</p>
-<p>3、匹配名称为helloWorld且可见性为public但返回值类型不为String的所有方法<br>.method(ElementMatchers.isPublic().and(ElementMatchers.named(“helloWorld”)).and(ElementMatchers.not(ElementMatchers.returns(String.class))))</p>
-<p>4、匹配名称为helloWorld且第二个入参为String类型的所有方法<br>.method(ElementMatchers.isPublic().and(ElementMatchers.named(“helloWorld”)).and(ElementMatchers.takesArgument(1, String.class)))</p>
-<h3 id="implement方法"><a href="#implement方法" class="headerlink" title="implement方法"></a>implement方法</h3><p>MethodDefinition.ImplementationDefinition.Optional的方法</p>
-<p>intercept：拦截</p>
-<p>Implementation方法</p>
-<p>FixedValue：返回固定的值</p>
-<p><strong>MethodDelegation</strong>：将方法委派由其他方法来执行（<strong>委派类中的方法必须和被委派类中的方法保持一致</strong>）</p>
-<p>MethodCall：基于方法回调</p>
-<p>InvokeDynamic：基于动态回调</p>
-<p>DefaultMethodCall：基于默认方法回调</p>
-<p>ExceptionMethod：基于异常方法调用</p>
-<p>InvocationHandlerAdapter：调用自定义</p>
-<p>withoutCode：接口方法为空代码抽象方法</p>
-<p>defaultValue：返回一个注解返回值</p>
-<p>注解                  说明<br>@Argument           绑定单个参数<br>@AllArguments       绑定所有参数的数组<br>@This               当前被拦截的、动态生成的那个对象<br>@Super              当前被拦截的、动态生成的那个对象的父类对象<br>@Origin             可以绑定到以下类型的参数：</p>
-<pre><code>            Method              被调用的原始方法
-            Constructor         被调用的原始构造器
-            Class               当前动态创建的类
-            MethodHandle
-            MethodType
-            String          动态类的toString()的返回值
-            int             动态方法的修饰符</code></pre>
-<p>@DefaultCall     调用默认方法而非super的方法<br>@SuperCall       用于调用父类版本的方法<br>@Super           注入父类型对象，可以是接口，从而调用它的任何方法<br>@RuntimeType     可以用在返回值、参数上，提示ByteBuddy禁用严格的类型检查<br>@Empty           注入参数的类型的默认值<br>@StubValue       注入一个存根值。对于返回引用、void的方法，注入null；对于返回原始类型的方法，注入0<br>@FieldValue      注入被拦截对象的一个字段的值<br>@Morph           类似于@SuperCall，但是允许指定调用参数</p>
-<h3 id="委派类中使用的常见注解"><a href="#委派类中使用的常见注解" class="headerlink" title="委派类中使用的常见注解"></a>委派类中使用的常见注解</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @Super 使用了@Super注解的委托类对象，此时这个被注解的入参在进行最似匹配时会被忽略，bytebuddy匹配到的依然是只有一个String入参的委托方法</span></span><br><span class="line"><span class="comment">// @Super 修饰被委派类的实例对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegateMooWithSuper</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Moo1</span><span class="params">(String param1, <span class="meta">@Super</span> Moo zuper)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;invoke time:&quot;</span> + System.currentTimeMillis());</span><br><span class="line">        <span class="keyword">return</span> zuper.Moo1(param1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果不需要修改入参，或者在被委托方法中调用超类其它方法，也可以使用@superCall注解</span></span><br><span class="line"><span class="comment">// 调用callable的call方法可以获取被委托方法的实现结果</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Moo</span><span class="params">(String param1, Integer param2,</span></span></span><br><span class="line"><span class="function"><span class="params">                             <span class="meta">@SuperCall</span> Callable&lt;String&gt; superCall)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String superCallResult = superCall.call();</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;wrapped by delegate:&#123;&quot;</span> + superCallResult + <span class="string">&quot;&#125;&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// @FieldValue</span></span><br><span class="line"><span class="comment">// 之后我们就可以通过反射给name注入值了，在后续方法的代理实现中也可以通过@FieldValue注解使用这个原本的类中不存在的属性</span></span><br><span class="line"><span class="comment">// 我们通过DelegateWithField代理原始类的Moo1方法，同时打印出传参和name属性的值</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegateWithField</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Moo1</span><span class="params">(String param1, <span class="meta">@FieldValue(value = &quot;name&quot;)</span> String name)</span> <span class="keyword">throws</span> Exception </span>&#123;<span class="keyword">return</span> <span class="string">&quot;parm1:&quot;</span> + param1 + <span class="string">&quot;;name:&quot;</span> + name;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="核心对象"><a href="#核心对象" class="headerlink" title="核心对象"></a>核心对象</h2><h3 id="ClassPool"><a href="#ClassPool" class="headerlink" title="ClassPool"></a>ClassPool</h3><p>ClassPool需要关注的方法</p>
+<p>1、getDefault：返回默认的ClassPool是一个单例模式的，一般通过该方法创建我们的ClassPool对象</p>
+<p>2、appendClassPath、insertClassPath：将一个ClassPath加到类搜索路径的末尾位置。通常通过该方法写入额外的类搜索路径，以解决多个类加载器环境中找不到类的尴尬。</p>
+<p>3、toClass: 将修改后的CtClass加载至当前线程的上下文类加载器中，CtClass的toClass方法是通过调用本方法实现。需要注意的是一旦调用该方法，则无法继续修改已经被加载的class。</p>
+<p>4、importPackage：导入包路径</p>
+<p>5、get、getCtClass：根据<strong>类路径名</strong>获取该类的CtClass对象，用于后续的编辑。</p>
+<p>6、getMethod：通过类路径和方法名获取CtMethod</p>
+<p>7、makeClass：创建一个类</p>
+<pre><code>  makeNestedClass：创建一个内部类</code></pre>
+<p>makeInterface：创建一个接口</p>
+<h3 id="CtClass"><a href="#CtClass" class="headerlink" title="CtClass"></a>CtClass</h3><p>CtClass需要关注的方法</p>
+<p>1、freeze：冻结一个类，使其不可修改</p>
+<p>2、isFrozen : 判断一个类是否已被冻结</p>
+<p>3、defrost : 解冻一个类，使其可以被修改。如果事先知道一个类会被defrost， 则禁止调用 prune 方法</p>
+<p>4、prune : 删除类不必要的属性，以减少内存占用。调用该方法后，许多方法无法将无法正常使用，慎用</p>
+<p>5、detach : 将该class从ClassPool中删除</p>
+<p>6、writeFile : 根据CtClass生成 .class 文件</p>
+<p>7、toClass : 通过类加载器加载该CtClass</p>
+<h3 id="CtField"><a href="#CtField" class="headerlink" title="CtField"></a>CtField</h3><p>CtField需要关注的方法</p>
+<p>1、setModifiers：设置字段的修饰符</p>
+<p>2、hasAnnotation：判断是否有该注解</p>
+<h3 id="CtMethod"><a href="#CtMethod" class="headerlink" title="CtMethod"></a>CtMethod</h3><p>CtMethod需要关注的方法(CtNewMethod的静态方法可以快速创建CtMethod对象)</p>
+<p>1、insertBefore : 在方法的起始位置插入代码</p>
+<p>2、insterAfter : 在方法的所有 return 语句前插入代码以确保语句能够被执行，除非遇到exception</p>
+<p>3、insertAt : 在指定的位置插入代码</p>
+<p>4、setBody : 将方法的内容设置为要写入的代码，当方法被 abstract修饰时，该修饰符被移除</p>
+<p>5、make : 创建一个新的方法</p>
+<p>注意到在上面代码中的：setBody()的时候我们使用了一些符号</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// $0=this / $1,$2,$3... 代表方法参数</span></span><br><span class="line">cons.setBody(<span class="string">&quot;&#123;$0.name = $1;&#125;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>$0</code>, <code>$1</code>, <code>$2</code>, …    <code>this</code> 和实际参数</p>
+<p><code>$args</code>参数数组。的类型<code>$args</code>是<code>Object[]</code></p>
+<p><code>$$</code>所有实际参数。例如，<code>m($$)</code>相当于 <code>m($1,$2,</code>…<code>)</code></p>
+<p><code>$cflow(</code>…<code>) cflow</code> 多变的</p>
+<p><code>$r</code>结果类型。它用于强制转换表达式。</p>
+<p><code>$w</code>包装器类型。它用于强制转换表达式。</p>
+<p><code>$_</code>结果值<code>$sigjava.lang.Class</code>表示形式参数类型的对象数组。</p>
+<p><code>$type</code>甲<code>java.lang.Class</code>表示正式结果类型对象。</p>
+<p><code>$classjava.lang.Class</code>表示当前编辑的类的对象。</p>
+
     </div>
 
     
@@ -347,7 +336,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/bytebuddy/" rel="tag"># bytebuddy</a>
+              <a href="/tags/javassist/" rel="tag"># javassist</a>
           </div>
 
         
@@ -356,12 +345,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/09/04/javassist/" rel="prev" title="javassist">
-      <i class="fa fa-chevron-left"></i> javassist
+    <a href="/2021/09/04/Reflect/" rel="prev" title="reflect">
+      <i class="fa fa-chevron-left"></i> reflect
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/09/04/Reflect/" rel="next" title="reflect">
-      reflect <i class="fa fa-chevron-right"></i>
+    <a href="/2021/09/05/byteBuddy/" rel="next" title="bytebuddy">
+      bytebuddy <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -422,7 +411,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ByteBuddy"><span class="nav-number">1.</span> <span class="nav-text">ByteBuddy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">1.1.</span> <span class="nav-text">引入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">核心方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#subclass"><span class="nav-number">1.3.1.</span> <span class="nav-text">subclass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#makeInterface"><span class="nav-number">1.3.2.</span> <span class="nav-text">makeInterface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#makePackage"><span class="nav-number">1.3.3.</span> <span class="nav-text">makePackage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#makeAnnotation"><span class="nav-number">1.3.4.</span> <span class="nav-text">makeAnnotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#makeEnumeration"><span class="nav-number">1.3.5.</span> <span class="nav-text">makeEnumeration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redefine"><span class="nav-number">1.3.6.</span> <span class="nav-text">redefine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rebase"><span class="nav-number">1.3.7.</span> <span class="nav-text">rebase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#with"><span class="nav-number">1.3.8.</span> <span class="nav-text">with</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ignore"><span class="nav-number">1.3.9.</span> <span class="nav-text">ignore</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Builder%E5%B8%B8%E8%A7%81%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">Builder常见方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ElementMatcher"><span class="nav-number">1.4.1.</span> <span class="nav-text">ElementMatcher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#implement%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.2.</span> <span class="nav-text">implement方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A7%94%E6%B4%BE%E7%B1%BB%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.4.3.</span> <span class="nav-text">委派类中使用的常见注解</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#javassist"><span class="nav-number">1.</span> <span class="nav-text">javassist</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">1.1.</span> <span class="nav-text">1.引入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9D%E4%BD%93%E9%AA%8C"><span class="nav-number">1.2.</span> <span class="nav-text">2.初体验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.3.</span> <span class="nav-text">核心对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ClassPool"><span class="nav-number">1.3.1.</span> <span class="nav-text">ClassPool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CtClass"><span class="nav-number">1.3.2.</span> <span class="nav-text">CtClass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CtField"><span class="nav-number">1.3.3.</span> <span class="nav-text">CtField</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CtMethod"><span class="nav-number">1.3.4.</span> <span class="nav-text">CtMethod</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -438,7 +427,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -506,7 +495,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">105k</span>
+    <span title="站点总字数">101k</span>
 </div>
 
 <!--
